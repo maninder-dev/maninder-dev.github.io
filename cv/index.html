@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Maninder Singh — CV</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Maninder Singh — Senior Software Engineer and Full Stack Web Developer with 9+ years of experience in Shopware, Symfony, PHP, React and WordPress.">
+  <meta name="author" content="Maninder Singh">
+  <link rel="icon" href="../favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="cv.css">
+</head>
+<body>
+  <div class="progress" id="scroll-progress"></div>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">Maninder Singh <span>· CV</span></div>
+      <nav class="nav" id="cv-nav" aria-label="Sections"></nav>
+      <div class="actions">
+        <button class="btn" type="button" id="theme-toggle">Dark</button>
+        <button class="btn btn-primary" type="button" id="print-btn">Print / PDF</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <main>
+      <section id="profile" data-nav="Profile">
+        <div class="hero">
+          <div>
+            <h1 class="hero-name" id="cv-name"></h1>
+            <p class="hero-title" id="cv-title"></p>
+            <ul class="contact" id="cv-contact"></ul>
+            <p class="hero-meta" id="cv-updated"></p>
+          </div>
+          <div class="stats" id="cv-stats"></div>
+        </div>
+      </section>
+
+      <section id="summary" data-nav="Summary">
+        <h2 class="section-title">Summary</h2>
+        <div class="lead" id="summary-body"></div>
+      </section>
+
+      <section id="expertise" data-nav="Expertise">
+        <h2 class="section-title">Professional expertise</h2>
+        <ul class="bullets" id="expertise-list"></ul>
+      </section>
+
+      <section id="experience" data-nav="Experience">
+        <h2 class="section-title">Work experience</h2>
+        <div id="experience-list"></div>
+      </section>
+
+      <section id="skills" data-nav="Skills">
+        <h2 class="section-title">Skills &amp; abilities</h2>
+        <div class="skills-grid" id="skills-grid"></div>
+        <h3 class="subhead">Management &amp; leadership</h3>
+        <ul class="tag-list" id="leadership-list"></ul>
+      </section>
+
+      <section id="education" data-nav="Education">
+        <h2 class="section-title">Education</h2>
+        <div id="education-list"></div>
+      </section>
+
+      <section id="projects" data-nav="Projects">
+        <h2 class="section-title">Selected projects</h2>
+        <div class="proj-toolbar">
+          <div class="chips" id="proj-filters" role="group" aria-label="Filter projects by category"></div>
+          <input class="search" type="search" id="proj-search" placeholder="Search projects, tech, industry…" aria-label="Search projects">
+        </div>
+        <p class="proj-meta"><span id="proj-shown">0</span> projects shown</p>
+        <div id="projects-body"></div>
+        <p class="empty" id="proj-empty" hidden>No projects match that filter.</p>
+      </section>
+
+      <section id="more" data-nav="More sites">
+        <h2 class="section-title">Additional sites delivered <span class="proj-count" id="more-count"></span></h2>
+        <ul class="more-list" id="more-list"></ul>
+      </section>
+    </main>
+
+    <p class="foot">© <span id="cv-year"></span> Maninder Singh · (+91) 98728-52673 · maninder6005@gmail.com</p>
+  </div>
+
+  <script src="cv.js"></script>
+</body>
+</html>
