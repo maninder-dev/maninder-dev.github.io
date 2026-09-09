@@ -1,0 +1,52 @@
+Maninder Singh
+Senior Software Engineer | Full Stack (PHP, Symfony, React) | 11+ Years
++91 98728 52673 | maninder6005@gmail.com | Mohali, Punjab, India
+linkedin.com/in/<handle> | github.com/maninder-dev | maninder-dev.github.io
+Professional Summary
+Senior Software Engineer with 11 years building and shipping production web applications end to end, from back-end architecture through UI, testing, deployment and long-term maintenance. Specializes in eCommerce on Shopware and Symfony: six Shopware storefronts covering custom themes, Administration plugins and modules, Symfony microservices, a multi-tenant Symfony 5 platform, and Doctrine ORM data layers on PHP 8 and MySQL.
+Delivers front ends in React.js and TypeScript (Redux, Redux-Saga, React Hooks, Material UI) and Angular, with 80+ websites and applications delivered across WordPress, Joomla, WooCommerce, Magento and Shopify. Works directly with clients in Germany, the UK, the US, Canada and Australia on requirements, code review, automated tests and release in Agile Scrum teams.
+Technical Skills
+Programming Languages: PHP 8, JavaScript (ES6+), TypeScript, HTML5, CSS3, SQL
+PHP Frameworks: Symfony 5, Symfony 4, Symfony 2
+Ecommerce Platforms: Shopware 6, Shopware, Magento, WooCommerce, Shopify
+Content Management Systems: WordPress, Joomla
+Frontend: React.js, ReactJS, Redux, Redux-Saga, React Hooks, Angular, jQuery, Bootstrap, Material UI, Sass
+Backend and APIs: Node.js, GraphQL, REST API, RESTful, Doctrine ORM, MVC
+Databases: MySQL, MariaDB, MongoDB
+Cloud and Infrastructure: AWS (Amazon Web Services), Apache, LAMP, WAMP, SSL, DNS, SSH
+Payments: Stripe, PayPal, Klarna, Payone, Braintree, Authorize.net, K-Net, BeanStream
+Tools and Practices: Git, GitHub, GitLab, Bitbucket, JIRA, Agile, Scrum, Unit Testing, Code Review, Search Engine Optimization (SEO)
+Industries: Ecommerce (e-commerce), Fashion, Grocery, Furniture, Pharmaceutical, Food, Automotive Warranty, HR and Psychometrics, Consulting
+Also worked with: Vue.js, Laravel, Next.js, Styled Components, Docker, CI/CD (Continuous Integration and Continuous Delivery), Microsoft Azure, PostgreSQL, Microsoft SQL Server, Oracle, PrestaShop, OpenCart, Express.js, SOAP
+Leadership: Team Leadership, Project Management, Mentoring, Task Delegation, Client Relations, Strategic Planning, Problem Solving, Communication
+Professional Experience
+Senior Software Engineer, Orione Solutions, Mohali, Punjab, India | March 2022 - Present
+Build and ship Shopware eCommerce storefronts for German and EU retail clients, [N] stores delivered and [N] built from scratch, covering custom Twig storefront themes, Administration plugins and Symfony-based modules.
+Develop back-end services in PHP 8 with Symfony and Doctrine ORM against MySQL, including [ONE CONCRETE SYSTEM: an ERP or product-feed import, a pricing and promotion rule engine, or multi-warehouse stock sync].
+Configure and extend checkout with payment and shipping providers including PayPal, Klarna and Payone, meeting German-market invoicing and consumer-payment expectations.
+Own client-facing delivery across [N] concurrent accounts: requirement analysis, estimation, code review, automated tests and production release.
+Work in Agile Scrum with daily stand-ups, sprint reviews and release planning, treating code review and automated tests as part of the definition of done.
+Senior Software Developer, Maven Softwares, Mohali, Punjab, India | April 2019 - February 2022
+Re-platformed a legacy travel-technology system into Symfony microservices with an Angular front end, owning the Campaign Master, Notes Management and Newsletter Unsubscription services end to end.
+Rebuilt a UK healthcare staffing marketplace in Symfony and MySQL, spanning job posting, locum verification, messaging, invoicing, statements and reporting, and delivered a multi-tenant Symfony 5 platform for a retail client.
+Built React and TypeScript interfaces for an OEM warranty and importer-audit platform at MSX International: designed the security and queue pages, added search and filtering across the allocation, unallocated-claims, roles and admin-management tables, redesigned the profile page, and wrote the automated tests.
+Delivered a privacy, cookie and consent-management portal on React, Node.js, GraphQL and MongoDB with a React Native companion app and Braintree payments; authored the technical and functional specifications and the test strategy.
+Shipped two further React platforms end to end: a psychometric assessment app with webcam capture, PDF report generation and Stripe payments, and a schools heritage-education platform where I designed and built all APIs, Facebook and Google OAuth, the subscription module and payment integration.
+Software Developer, Vertex Info Solutions, Chandigarh, India | September 2015 - March 2019
+Led full external and intranet site deployments on Joomla from planning and setup through launch and post-deployment support, building a custom mooTree file-navigation extension, an intranet gallery component, Gantry template customization and a Google Maps location finder.
+Consolidated a client's disparate static pages and dynamic fragments into a single Joomla codebase, integrating InfusionSoft and BeanStream payment APIs with Joomla membership objects and configuring the learning-management system.
+Migrated a life-sciences company from static HTML to WordPress: recreated several hundred pages, transferred content and assets, mapped 301 redirects, monitored broken links and built new lead-capture forms.
+Built a 150+ field online estimate form with admin-side capture and workflow for a moving-services client, and shipped a WordPress multisite management plugin with one-click setup, domain mapping, cPanel integration and bulk theme and plugin activation across child sites.
+Delivered custom PHP, WordPress, Joomla, WooCommerce and Magento sites end to end for clients in the UK, the US, Canada, Australia and Germany, including theme and plugin development, third-party API integration, payment gateway setup (Authorize.net, PayPal, K-Net, BeanStream) and LAMP hosting, SSL and DNS.
+Projects
+Selected Shopware and eCommerce Builds
+koffer-to-go.de - Shopware 6: luggage and travel-goods storefront with catalog browsing, secure payments, shipping options and customer account management.
+frostkrone.de - Shopware, built from scratch: frozen-food manufacturer storefront with a broad multi-category catalog.
+meentzen.de - Shopware, built from scratch: fully responsive skincare and beauty storefront.
+rbb-online-shop.de - Shopware, custom theme: brand storefront with a bespoke theme and tailored product presentation.
+sassyclassy.de - Shopware: fashion and apparel storefront.
+val-store.com - Shopware: multi-category retail storefront.
+Portfolio: 80+ additional websites and applications delivered across WordPress, Joomla, WooCommerce, Magento, Shopify and custom PHP for clients in the UK, US, Canada, Australia, Germany and Switzerland.
+maninder-dev.github.io
+Education
+Bachelor of Science in Information Technology, Doaba College (Guru Nanak Dev University), Jalandhar, Punjab, India | 2015

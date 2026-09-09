@@ -1,0 +1,8 @@
+{
+  "name": "cv-build-tools",
+  "private": true,
+  "description": "Generates ATS resume .docx/.txt files from ../cv-data.js. Not part of the published site.",
+  "devDependencies": {
+    "docx": "8.5.0"
+  }
+}

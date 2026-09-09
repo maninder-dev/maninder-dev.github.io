@@ -322,14 +322,13 @@ section {
 }
 .job-company { font-size: 17px; font-weight: 700; }
 .job-period {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: .06em;
   color: var(--text-mute);
   background: var(--tag-bg);
   border-radius: 999px;
   padding: 3px 9px;
+  white-space: nowrap;
 }
 .job-period.is-now {
   color: var(--now-text);
