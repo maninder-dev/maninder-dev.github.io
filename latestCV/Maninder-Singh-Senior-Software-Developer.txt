@@ -1,0 +1,65 @@
+Maninder Singh
+Senior Software Developer | PHP, Laravel, Symfony
++91 98728 52673 | maninder6005@gmail.com | linkedin.com/in/maninder0000 | Mohali, Punjab, India
+Summary
+Senior Software Developer with 11 years of experience building production web applications in PHP 8, Laravel and Symfony, with modern front ends in React.js, TypeScript and Angular. Specializes in Shopware 6 eCommerce, Symfony microservices and multi-tenant platforms for clients in Germany, the UK, the US, Canada and Australia. Currently building an AI voice-receptionist SaaS with React 19 and VAPI. Mentors junior developers and owns client delivery from requirements to release in Agile Scrum.
+Technical Skills
+Core Languages: PHP 8, Java, JavaScript (ES6+), TypeScript, SQL, HTML5, CSS3
+Backend Frameworks: Symfony, Symfony 5, Laravel, Laminas, Java Spring, Doctrine ORM, Node.js, Express.js, NestJS, MEAN Stack, MERN Stack, REST API, GraphQL, Microservices
+AI and Voice: VAPI Voice AI, Bolna, LiveKit, AI Call Classification, Twilio Lookup, Nomorobo
+Frontend: React.js, ReactJS, React 19, Next.js, Vite, Angular, Ionic, Redux, Redux-Saga, React Hooks, Material UI, jQuery, Bootstrap, Sass
+Ecommerce and CMS: Shopware 6, Shopware, Twig, Magento, WooCommerce, Shopify, WordPress, Joomla
+Databases: MySQL, MariaDB, MongoDB, PostgreSQL, Vector Database
+Cloud and DevOps: AWS (Amazon Web Services), Apache, LAMP, Git, GitHub, GitLab, Bitbucket, SSL, DNS
+Payments: Stripe, PayPal, Klarna, Payone, Braintree, QuickPay, Authorize.net, BeanStream
+Practices: Agile, Scrum, JIRA, Code Review, Unit Testing, Mentoring, Client Communication
+Also worked with: Vue.js, Docker, CI/CD (Continuous Integration and Continuous Delivery), Microsoft Azure, PrestaShop, OpenCart
+Work Experience
+Senior Software Engineer	February 2017 - Present
+Orion eSolutions, LLC, Mohali, Punjab, India
+Delivered 6 Shopware 6 storefronts for German and EU retailers, 2 built from scratch, with custom plugins, Twig themes and Klarna, Payone and PayPal checkout.
+Built 3 Symfony platforms (2 multi-tenant), including Laminas microservices for a flight and hotel booking system and a UK healthcare staffing marketplace, plus Laravel back ends.
+Built React and TypeScript front ends for 7 products, including a consulting platform serving 8,000+ consultants and an AI voice-receptionist SaaS.
+Develop MEAN and MERN stack apps (MongoDB, Express.js, Angular, React, Node.js) with REST and GraphQL APIs, including a 4-role Angular and Ionic survey platform.
+Lead code reviews and client delivery in Agile Scrum for clients in 5 countries, and mentor junior developers.
+Senior Software Developer	October 2015 - January 2017
+Maven Softwares, Mohali, Punjab, India
+Built Laravel web applications and REST APIs for clients in 4 countries (UK, US, Canada, Australia).
+Developed custom WordPress themes, plugins and WooCommerce stores, and migrated a life-sciences site of several hundred pages from static HTML with mapped 301 redirects.
+Built a WordPress multisite management plugin (wpempirebuilder.com) with one-click setup, domain mapping, cPanel integration and bulk theme and plugin activation.
+Projects
+SaaS and Enterprise Platforms
+app.missionalagents.com: MissionalAgents, a multi-tenant AI phone-receptionist SaaS for churches. A VAPI voice AI agent answers the phone line of each church, classifies calls by topic, answers from a church-specific Knowledge Engine and transfers live or takes a message. Built staff email notifications with per-contact frequency and spam screening with Nomorobo and Twilio Lookup (React 19, Vite, TypeScript, VAPI Voice AI, Twilio, Nomorobo, REST API)
+providerpassport.io: Provider Passport, a healthcare credentialing platform. Built Angular and Java Spring features for managing hospital, clinic, doctor, nurse and staff records, and the patient and provider data each insurance company requires (Angular, Java, Spring Framework, REST API, TypeScript)
+staff.mca.ca: MCA retail product survey platform with four role-based apps (staff.mca.ca, fieldrep.mca.ca, superadmin.mca.ca and client admin). Built the Angular portals and the Ionic surveyor mobile app for survey jobs shared by client admins (Angular, Ionic, TypeScript, REST API, Role-based Access Control)
+Shopware and eCommerce
+koffer-to-go.de: Online bag store built on Shopware 6, focused on a user-friendly interface, product browsing, secure payments, shipping options and customer account management. (Shopware 6, Payments)
+frostkrone.de: Comprehensive Shopware eCommerce platform built from scratch for a diverse selection of food products. (Shopware, From scratch, Food)
+meentzen.de: Fully responsive, modern Shopware site built from scratch, showcasing skincare and beauty products. (Shopware, From scratch)
+rbb-online-shop.de: Shopware store with a custom theme built to give a tailored shopping experience for a specific brand and product line. (Shopware, Custom theme)
+sassyclassy.de: Shopware-based fashion eCommerce site offering a wide range of clothing for browsing and purchase. (Shopware, Fashion)
+val-store.com: Shopware-based eCommerce shop covering a broad product range. (Shopware)
+Symfony and Enterprise
+schmetterling.de: Multi-tenant airline and hotel booking platform on Symfony and PostgreSQL. Built the Laminas microservices, new Symfony components and an Angular UI; owned the Campaign Master, Notes Management and Newsletter Unsubscriptions services. (Symfony, Laminas, PostgreSQL, Microservices, Multi-tenant)
+locumbay.com: Rebuilt an existing booking platform in Symfony with new modules, UI and workflow. Pharmacies post jobs and locums apply for part-time or permanent work; includes full reporting, invoices, statements, verification, messaging and notifications. (Symfony, MySQL)
+local-brand-x.com: Multi-tenant Symfony 5 platform with MySQL and several external services for additional functionality. (Symfony 5, Multi-tenant)
+React and TypeScript
+MSXI mWISE: Warranty platform for vehicle manufacturers covering importer audits and warranty assessments. Built the security and queue pages, table search filters and automated tests. (React, TypeScript, Redux, Material UI)
+XcooBee (Art of Living): Privacy and consent network portal with multi-user chat, secure data sharing, a payment wizard and a React Native mobile app, plus specs and code reviews. (React, Node.js, GraphQL, MongoDB, React Native)
+Heritage Olympiad: Platform bringing heritage education into Indian schools. Built the front end and all APIs, Facebook and Google login, subscriptions and payment integration. (React, Redux, API design)
+Talent Recognition: Psychometric testing web app with admin and user roles. Implemented web-camera capture and PDF generation, Stripe payments, the partner onboarding process and React-Redux/Hooks state management; defined QA procedures and deployment. (React, Redux, Stripe)
+Guild: Virtual consulting firm platform for a client-reported network of 8,000+ vetted independent consultants. Built the front end and design to client needs, created the resource and project-posting features, and worked across both sides of the application. (React, Bootstrap)
+triceraprint.com: Print software tool built in React. (React)
+WordPress
+wpempirebuilder.com: WordPress plugin making multisite trivial to run: one-click multisite setup, integrated domain mapping, automatic cPanel integration and bulk plugin/theme activation on selected child sites. (Plugin, Multisite)
+giladlab.uchicago.edu: Custom rebuild of a genetics department site for the University of Chicago. (Custom build)
+chronotek.net: Built out an HTML-encoded WordPress website. (Theme)
+yorkvilla.in: Shirt customiser tool letting customers change button, collar and cuff styles; built a custom extension integrated with the cart system. (Extension, Cart)
+porterandyork.com: WooCommerce store built from scratch. (WooCommerce, From scratch)
+bluestarcoffeeroasters.com: Coffee store developed in WooCommerce. (WooCommerce)
+Magento and Shopify
+whatisblik.com: Shopify eCommerce site for graphics products. (Shopify)
+zinus.com: Shopify and Shogun online store for mattresses. (Shopify, Shogun)
+Education
+Bachelor of Science in Information Technology	2011
+Doaba College (Guru Nanak Dev University), Jalandhar, Punjab, India

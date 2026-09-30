@@ -71,34 +71,55 @@ const CV = {
      their confidence score. */
   atsTitle: 'Senior Software Engineer',
 
-  /* Resume variants. Only the headline, emphasis and section order change —
-     the employer-attached title is always the factual 'Senior Software
-     Engineer'. A headline is positioning; a job entry is a claim. */
-  /* headline = the letter-spaced title under the name. leadCategory, if set,
-     moves that project category to the top of Projects. */
+  /* Resume variants. Each sets the headline, the summary, an optional role
+     line at the top of Technical Skills (coreSkills), which skills groups
+     come first (skillOrder), which new projects lead (featured) and which
+     project category comes first (leadCategory). The employer-attached job
+     titles never change: a headline is positioning, a job entry is a claim. */
   atsVariants: {
-    master: {
-      file: 'Maninder-Singh-Senior-Software-Engineer',
-      headline: 'Senior Software Engineer | Full Stack Developer',
+    fullstack: {
+      file: 'Maninder-Singh-Full-Stack-Developer',
+      headline: 'Senior Full Stack Developer',
+      summary: 'Senior Full Stack Developer with <strong>' + ATS_YEARS + ' years of experience</strong> building production web applications end to end: back ends in <strong>PHP 8, Laravel, Symfony and Node.js</strong>, front ends in <strong>React, Next.js, TypeScript and Angular</strong>. Delivers multi-tenant SaaS platforms, REST and GraphQL APIs, MEAN and MERN stack applications and Shopware 6 eCommerce for clients in Germany, the UK, the US, Canada and Australia. Currently building an AI voice-receptionist SaaS. Leads code reviews and mentors junior developers in Agile Scrum.',
+      coreSkills: { group: 'Full Stack', items: ['PHP 8', 'Laravel', 'Symfony', 'Node.js', 'React.js', 'Next.js', 'Angular', 'TypeScript', 'MySQL', 'MongoDB', 'REST API', 'GraphQL'] },
+      sections: ['summary', 'skills', 'experience', 'projects', 'education']
+    },
+    mean: {
+      file: 'Maninder-Singh-MEAN-Stack-Developer',
+      headline: 'Senior MEAN Stack Developer',
+      summary: 'Senior MEAN Stack Developer with <strong>' + ATS_YEARS + ' years of experience</strong> building production web applications in <strong>MongoDB, Express.js, Angular and Node.js</strong> with TypeScript, plus PHP back ends in <strong>Laravel and Symfony</strong>. Built Angular platforms for healthcare provider credentialing and a 4-role retail survey system with an Ionic mobile app, Angular front ends for a multi-tenant flight and hotel booking platform, and REST and GraphQL APIs on Node.js. Works with clients in Germany, the UK, the US, Canada and Australia, leads code reviews and mentors junior developers.',
+      coreSkills: { group: 'MEAN Stack', items: ['MongoDB', 'Express.js', 'Angular', 'Node.js', 'TypeScript', 'Ionic', 'REST API', 'GraphQL'] },
+      skillOrder: ['Frontend', 'Backend Frameworks', 'Databases'],
+      featured: ['providerpassport', 'mca', 'missional'],
+      sections: ['summary', 'skills', 'experience', 'projects', 'education']
+    },
+    mern: {
+      file: 'Maninder-Singh-MERN-Stack-Developer',
+      headline: 'Senior MERN Stack Developer',
+      summary: 'Senior MERN Stack Developer with <strong>' + ATS_YEARS + ' years of experience</strong> building production web applications in <strong>MongoDB, Express.js, React and Node.js</strong> with TypeScript, Next.js and Redux. Built React front ends for <strong>7 products</strong>, including an AI voice-receptionist SaaS and a consulting platform serving 8,000+ consultants, and a privacy and consent portal on Node.js, GraphQL and MongoDB with a React Native app. Also ships PHP back ends in Laravel and Symfony, and works with clients in Germany, the UK, the US, Canada and Australia.',
+      coreSkills: { group: 'MERN Stack', items: ['MongoDB', 'Express.js', 'React.js', 'Node.js', 'Next.js', 'TypeScript', 'Redux', 'React Native', 'REST API', 'GraphQL'] },
+      skillOrder: ['Frontend', 'Backend Frameworks', 'Databases'],
+      featured: ['missional', 'providerpassport', 'mca'],
+      leadCategory: 'React & TypeScript',
       sections: ['summary', 'skills', 'experience', 'projects', 'education']
     },
     shopware: {
-      file: 'Maninder-Singh-Shopware-Symfony-Developer',
+      file: 'Maninder-Singh-Shopware-Developer',
       headline: 'Senior Shopware Developer | eCommerce Engineer',
+      summary: 'Senior Shopware Developer with <strong>' + ATS_YEARS + ' years of experience</strong> in PHP eCommerce. Delivered <strong>6 Shopware 6 storefronts</strong> for German and EU retailers, 2 built from scratch, with custom plugins, Twig storefront themes, Administration extensions and <strong>Klarna, Payone and PayPal</strong> checkout. Strong in <strong>Symfony, PHP 8 and MySQL</strong>, including Laminas microservices and multi-tenant Symfony platforms, with React and Angular front ends. Works directly with clients from requirements to release in Agile Scrum and mentors junior developers.',
+      coreSkills: { group: 'Shopware', items: ['Shopware 6', 'Shopware Plugins', 'Twig', 'Symfony', 'PHP 8', 'Doctrine ORM', 'MySQL', 'Klarna', 'Payone', 'PayPal'] },
+      skillOrder: ['Ecommerce and CMS', 'Backend Frameworks', 'Payments'],
       leadCategory: 'Shopware & eCommerce',
-      sections: ['summary', 'skills', 'projects', 'experience', 'education']
-    },
-    product: {
-      file: 'Maninder-Singh-Full-Stack-React-Engineer',
-      headline: 'Senior Full Stack Engineer',
       sections: ['summary', 'skills', 'experience', 'projects', 'education']
     },
-    services: {
-      file: 'Maninder-Singh-Senior-Software-Engineer-IN',
-      headline: 'Senior Software Engineer | ' + ATS_YEARS + ' Years',
+    seniordev: {
+      file: 'Maninder-Singh-Senior-Software-Developer',
+      headline: 'Senior Software Developer | PHP, Laravel, Symfony',
+      summary: 'Senior Software Developer with <strong>' + ATS_YEARS + ' years of experience</strong> building production web applications in <strong>PHP 8, Laravel and Symfony</strong>, with modern front ends in <strong>React.js, TypeScript and Angular</strong>. Specializes in <strong>Shopware 6 eCommerce</strong>, Symfony microservices and multi-tenant platforms for clients in Germany, the UK, the US, Canada and Australia. Currently building an AI voice-receptionist SaaS with React 19 and VAPI. Mentors junior developers and owns client delivery from requirements to release in Agile Scrum.',
       sections: ['summary', 'skills', 'experience', 'projects', 'education']
     }
   },
+
 
   updated: '5 September 2026',
 

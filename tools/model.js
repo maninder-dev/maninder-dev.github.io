@@ -57,12 +57,20 @@ function buildModel(variantName) {
   const variant = CV.atsVariants[variantName];
   if (!variant) throw new Error(`Unknown ATS variant "${variantName}"`);
 
+  /* The variant's role line first, then its preferred groups, then the rest. */
+  function orderedSkills() {
+    const order = variant.skillOrder || [];
+    const rank = (g) => (order.includes(g.group) ? order.indexOf(g.group) : order.length);
+    const groups = CV.skills.slice().sort((a, b) => rank(a) - rank(b));
+    return (variant.coreSkills ? [variant.coreSkills] : []).concat(groups);
+  }
+
   const sections = {
     summary: () => [{ kind: 'heading', text: 'Summary' }]
-      .concat((CV.atsSummary ? [CV.atsSummary] : CV.summary).map((text) => ({ kind: 'para', text }))),
+      .concat((variant.summary ? [variant.summary] : CV.atsSummary ? [CV.atsSummary] : CV.summary).map((text) => ({ kind: 'para', text }))),
 
     skills: () => [{ kind: 'heading', text: 'Technical Skills' }]
-      .concat(CV.skills.map((g) => ({ kind: 'skill', label: g.group, items: g.items }))),
+      .concat(orderedSkills().map((g) => ({ kind: 'skill', label: g.group, items: g.items }))),
 
     experience: () => {
       const out = [{ kind: 'heading', text: 'Work Experience' }];
@@ -84,7 +92,7 @@ function buildModel(variantName) {
       const isOffline = (p) => offline.has(p.name.replace(/^www\./, '')) || offline.has(host(p.url));
       const cats = [{
         category: P.featuredCategory,
-        items: P.featured.map((k) => {
+        items: (variant.featured || P.featured).map((k) => {
           const p = CV.atsProjects[k];
           if (!p) throw new Error(`Unknown featured project "${k}"`);
           return { label: p.links[0].label, url: p.links[0].url, text: `${p.brief} (${p.tech.join(', ')})` };
