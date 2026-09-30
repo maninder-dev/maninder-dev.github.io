@@ -9,37 +9,19 @@
    Node:     require('./cv-data.js') -> { CV, fmtMonthYear, fmtRange }
 ------------------------------------------------------------------ */
 
-/* ==================================================================
-   !! ESTIMATED — REPLACE WITH YOUR REAL DATES !!
-
-   No employment date exists in ANY of the 11 source CVs in cv/ —
-   not one month, not one year. The five dates below were derived by
-   fitting the "years of experience" claims in those CVs against the
-   dates the files were actually saved:
-
-     "6+ years" as of Mar 2022  ->  6.5   fits
-     "7 years"  as of Apr 2023  ->  7.6   fits
-     "8+ years" as of Jan 2024  ->  8.4   fits
-     "9+ years" as of Oct 2024  ->  9.1   fits
-
-   All four converge on a career start of September 2015, which makes
-   you 11 years experienced today — not the "9+" the old CV claimed,
-   because that number was copied from a CV saved in October 2024 and
-   never advanced.
-
-   These are ESTIMATES of your own career. Correct them before you
-   send this resume anywhere. Set datesEstimated to false once done;
-   the build prints a warning until you do.
-   ================================================================== */
+/* Employment dates, from Maninder's LinkedIn profile (September 2026).
+   Earlier non-developer roles (Computer Operator, VK Enterprises, 2011-12;
+   Executive Assistant, Jaison Exports, 2012) are left off the resume.
+   gradYear from Maninder (September 2026). */
 const DATES = {
-  datesEstimated: true,
-  orioneStart: '2022-03',
-  mavenStart: '2019-04',
-  mavenEnd: '2022-02',
-  vertexStart: '2015-09',
-  vertexEnd: '2019-03',
-  gradYear: '2015',
-  careerStart: '2015-09'
+  datesEstimated: false,
+  orionStart: '2017-02',
+  mavenStart: '2015-10',
+  mavenEnd: '2017-01',
+  vertexStart: '2013-07',
+  vertexEnd: '2015-09',
+  gradYear: '2011',
+  careerStart: '2013-07'
 };
 
 /* ---------------------------- date helpers ---------------------------- */
@@ -86,29 +68,28 @@ const CV = {
   /* Resume variants. Only the headline, emphasis and section order change —
      the employer-attached title is always the factual 'Senior Software
      Engineer'. A headline is positioning; a job entry is a claim. */
+  /* headline = the letter-spaced title under the name. leadCategory, if set,
+     moves that project category to the top of Projects. */
   atsVariants: {
     master: {
       file: 'Maninder-Singh-Senior-Software-Engineer',
-      headline: 'Senior Software Engineer | Full Stack Developer (PHP, Symfony, Shopware, React)',
-      lead: 'ecommerce',
+      headline: 'Senior Software Engineer | Full Stack Developer',
       sections: ['summary', 'skills', 'experience', 'projects', 'education']
     },
     shopware: {
       file: 'Maninder-Singh-Shopware-Symfony-Developer',
-      headline: 'Senior Shopware Developer | Shopware 6, Symfony and PHP 8 eCommerce Engineer',
-      lead: 'ecommerce',
+      headline: 'Senior Shopware Developer | eCommerce Engineer',
+      leadCategory: 'Shopware & eCommerce',
       sections: ['summary', 'skills', 'projects', 'experience', 'education']
     },
     product: {
       file: 'Maninder-Singh-Full-Stack-React-Engineer',
-      headline: 'Senior Full Stack Engineer | React, TypeScript, Node.js, PHP and Symfony',
-      lead: 'frontend',
+      headline: 'Senior Full Stack Engineer',
       sections: ['summary', 'skills', 'experience', 'projects', 'education']
     },
     services: {
       file: 'Maninder-Singh-Senior-Software-Engineer-IN',
-      headline: 'Senior Software Engineer | Full Stack (PHP, Symfony, React) | ' + YEARS + '+ Years',
-      lead: 'ecommerce',
+      headline: 'Senior Software Engineer | ' + YEARS + '+ Years',
       sections: ['summary', 'skills', 'experience', 'projects', 'education']
     }
   },
@@ -121,12 +102,9 @@ const CV = {
   contact: [
     { label: 'Phone', value: '(+91) 98728-52673', ats: '+91 98728 52673', href: 'tel:+919872852673', icon: 'phone' },
     { label: 'Email', value: 'maninder6005@gmail.com', href: 'mailto:maninder6005@gmail.com', icon: 'mail' },
-    { label: 'Location', value: 'Mohali, Punjab, India', href: null, icon: 'pin' },
-    /* TODO Maninder: replace <handle> with your real LinkedIn URL, or delete
-       this row. Most "AI recruiter" sourcing tools search LinkedIn and GitHub,
-       not resume files sitting in an ATS — this is the highest-value line here. */
-    { label: 'LinkedIn', value: 'linkedin.com/in/<handle>', href: 'https://www.linkedin.com/in/<handle>', icon: 'link', placeholder: true },
-    { label: 'GitHub', value: 'github.com/maninder-dev', href: 'https://github.com/maninder-dev', icon: 'link', placeholder: true },
+    { label: 'Location', value: 'Mohali, Punjab, India', ats: 'Mohali, Punjab, India', href: null, icon: 'pin' },
+    { label: 'LinkedIn', value: 'linkedin.com/in/maninder0000', href: 'https://www.linkedin.com/in/maninder0000/', icon: 'link' },
+    { label: 'GitHub', value: 'github.com/maninder-dev', href: 'https://github.com/maninder-dev', icon: 'link' },
     { label: 'Portfolio', value: 'maninder-dev.github.io', href: 'https://maninder-dev.github.io/', icon: 'link' }
   ],
 
@@ -139,12 +117,16 @@ const CV = {
     { value: '3', label: 'Companies' }
   ],
 
-  /* The .docx joins these into ONE paragraph with tags stripped, so the web
-     emphasis never reaches the resume text stream. Keep them factual and in
-     sync — tools/verify-docx.sh diffs the stripped text against the .txt. */
+  /* Resume summary: one short paragraph, since resume checkers flag long
+     summaries. The web page keeps the longer three-paragraph `summary`. */
+  atsSummary: 'Senior Software Engineer with <strong>' + YEARS + ' years of experience</strong> building production web applications in <strong>PHP 8, Laravel and Symfony</strong>, with modern front ends in <strong>React.js, TypeScript and Angular</strong>. Specializes in <strong>Shopware 6 eCommerce</strong>, Symfony microservices and multi-tenant platforms for clients in Germany, the UK, the US, Canada and Australia. Currently building an AI voice-receptionist SaaS with React 19 and VAPI. Mentors junior developers and owns client delivery from requirements to release in Agile Scrum.',
+
+  /* <strong> renders bold on the web AND as bold runs in the .docx; the .txt
+     strips it. Three paragraphs, matching the reference layout. */
   summary: [
-    'Senior Software Engineer with <strong>' + YEARS + ' years</strong> building and shipping production web applications end to end, from back-end architecture through UI, testing, deployment and long-term maintenance. Specializes in eCommerce on <strong>Shopware and Symfony</strong>: six Shopware storefronts covering custom themes, Administration plugins and modules, Symfony microservices, a multi-tenant Symfony 5 platform, and Doctrine ORM data layers on PHP 8 and MySQL.',
-    'Delivers front ends in <strong>React.js and TypeScript</strong> (Redux, Redux-Saga, React Hooks, Material UI) and Angular, with 80+ websites and applications delivered across WordPress, Joomla, WooCommerce, Magento and Shopify. Works directly with clients in Germany, the UK, the US, Canada and Australia on requirements, code review, automated tests and release in Agile Scrum teams.'
+    'Senior Software Engineer with <strong>' + YEARS + ' years of experience</strong> designing, building and maintaining production web applications end to end, from back-end architecture and APIs through UI, testing, deployment and long-term support. Strong expertise in <strong>PHP 8, Laravel and Symfony</strong>, with a record of delivering eCommerce platforms, enterprise portals and multi-tenant systems for clients in Germany, the UK, the US, Canada and Australia.',
+    'Specializes in <strong>Shopware eCommerce</strong>: storefronts built from scratch, custom Twig themes, Administration plugins and Symfony-based modules, with checkout integrations for <strong>PayPal, Klarna and Payone</strong>. Experienced in re-platforming legacy systems into <strong>Symfony microservices</strong> and multi-tenant Symfony 5 applications backed by Doctrine ORM and MySQL.',
+    'Builds modern front ends in <strong>React.js, TypeScript and Angular</strong> (Redux, Redux-Saga, React Hooks, Material UI) integrated with REST and GraphQL APIs. Works directly with clients on requirements, estimation, <strong>code review</strong>, automated testing and release in Agile Scrum teams, and mentors junior developers. Currently building an <strong>AI voice-receptionist SaaS</strong> with React 19 and VAPI voice AI.'
   ],
 
   /* Web only. Cut from the .docx: it duplicates the summary and skills, and it
@@ -174,26 +156,39 @@ const CV = {
      project attached to an employer, a date and a verb is strong
      evidence; the same project floating in a list is weak evidence.
 
-     [N] and [BRACKETED] text are placeholders for facts the source
-     CVs do not contain. Nothing is invented. Fill or delete them.
+     No figure here is invented. The source CVs contain almost no
+     metrics (team size, traffic, % improvements) — adding real ones
+     from memory is the single biggest upgrade still available.
 
-     Which projects belong to which employer is ALSO an inference,
-     from the technology recency and the title ladder. Confirm it.
+     Dates come from LinkedIn. Which projects sit under which employer is
+     still inferred from the dates: everything built on Symfony 5 (2019),
+     Laminas (2020), React Hooks (2019) or Shopware 6 (2019) postdates
+     Maven (Oct 2015 - Jan 2017), so it all belongs to Orion eSolutions.
      ---------------------------------------------------------------- */
+  /* atsPoints = the short resume bullets; points = the full list (web page). */
   experience: [
     {
-      company: 'Orione Solutions',
+      company: 'Orion eSolutions, LLC',
       role: 'Senior Software Engineer',
       location: 'Mohali, Punjab, India',
-      start: DATES.orioneStart,
+      start: DATES.orionStart,
       end: null,
       current: true,
+      atsPoints: [
+        'Delivered <strong>6 Shopware 6 storefronts</strong> for German and EU retailers, <strong>2 built from scratch</strong>, with custom plugins, Twig themes and Klarna, Payone and PayPal checkout.',
+        'Built <strong>3 Symfony platforms</strong> (2 multi-tenant), including Laminas microservices for a flight and hotel booking system and a UK healthcare staffing marketplace, plus Laravel back ends.',
+        'Built <strong>React and TypeScript</strong> front ends for <strong>7 products</strong>, including a consulting platform serving <strong>8,000+ consultants</strong> and an AI voice-receptionist SaaS.',
+        'Develop <strong>MEAN and MERN stack</strong> apps (MongoDB, Express.js, Angular, React, Node.js) with REST and GraphQL APIs, including a <strong>4-role</strong> Angular and Ionic survey platform.',
+        'Lead code reviews and client delivery in Agile Scrum for clients in <strong>5 countries</strong>, and mentor junior developers.'
+      ],
       points: [
-        'Build and ship Shopware eCommerce storefronts for German and EU retail clients, [N] stores delivered and [N] built from scratch, covering custom Twig storefront themes, Administration plugins and Symfony-based modules.',
-        'Develop back-end services in PHP 8 with Symfony and Doctrine ORM against MySQL, including [ONE CONCRETE SYSTEM: an ERP or product-feed import, a pricing and promotion rule engine, or multi-warehouse stock sync].',
-        'Configure and extend checkout with payment and shipping providers including PayPal, Klarna and Payone, meeting German-market invoicing and consumer-payment expectations.',
-        'Own client-facing delivery across [N] concurrent accounts: requirement analysis, estimation, code review, automated tests and production release.',
-        'Work in Agile Scrum with daily stand-ups, sprint reviews and release planning, treating code review and automated tests as part of the definition of done.'
+        'Build features for <strong>MissionalAgents</strong>, a multi-tenant AI phone-receptionist SaaS for churches, with a <strong>React 19</strong> front end and VAPI voice AI.',
+        'Build and maintain <strong>Shopware 6</strong> eCommerce storefronts for German and EU retail clients, including stores built from scratch, custom <strong>Twig</strong> storefront themes, Administration plugins and Symfony-based modules, with <strong>PayPal, Klarna and Payone</strong> checkout integrations.',
+        'Built <strong>Laminas microservices</strong> for Schmetterling, a multi-tenant flight and hotel booking platform on <strong>Symfony and PostgreSQL</strong>, with <strong>Angular</strong> front ends.',
+        'Rebuilt a UK healthcare staffing marketplace in <strong>Symfony and MySQL</strong> (job posting, locum verification, messaging, invoicing and reporting) and delivered a <strong>multi-tenant Symfony 5</strong> platform for a retail client.',
+        'Built enterprise interfaces in <strong>React and TypeScript</strong> with Redux, Redux-Saga, React Hooks and Material UI for MSX International, and a privacy and consent portal on <strong>Node.js, GraphQL and MongoDB</strong> with a React Native app.',
+        'Shipped platforms with <strong>Stripe and Braintree</strong> payments, Facebook and Google OAuth and subscription modules, and developed back-end services in <strong>PHP 8, Symfony and Laravel</strong> exposing REST APIs.',
+        'Own client-facing delivery end to end (requirements, estimation, <strong>code review</strong>, automated tests and release in Agile Scrum) and mentor junior developers.'
       ]
     },
     {
@@ -202,12 +197,14 @@ const CV = {
       location: 'Mohali, Punjab, India',
       start: DATES.mavenStart,
       end: DATES.mavenEnd,
+      atsPoints: [
+        'Built <strong>Laravel</strong> web applications and REST APIs for clients in <strong>4 countries</strong> (UK, US, Canada, Australia).',
+        'Developed custom <strong>WordPress</strong> themes, plugins and WooCommerce stores, and migrated a life-sciences site of <strong>several hundred pages</strong> from static HTML with mapped 301 redirects.'
+      ],
       points: [
-        'Re-platformed a legacy travel-technology system into Symfony microservices with an Angular front end, owning the Campaign Master, Notes Management and Newsletter Unsubscription services end to end.',
-        'Rebuilt a UK healthcare staffing marketplace in Symfony and MySQL, spanning job posting, locum verification, messaging, invoicing, statements and reporting, and delivered a multi-tenant Symfony 5 platform for a retail client.',
-        'Built React and TypeScript interfaces for an OEM warranty and importer-audit platform at MSX International: designed the security and queue pages, added search and filtering across the allocation, unallocated-claims, roles and admin-management tables, redesigned the profile page, and wrote the automated tests.',
-        'Delivered a privacy, cookie and consent-management portal on React, Node.js, GraphQL and MongoDB with a React Native companion app and Braintree payments; authored the technical and functional specifications and the test strategy.',
-        'Shipped two further React platforms end to end: a psychometric assessment app with webcam capture, PDF report generation and Stripe payments, and a schools heritage-education platform where I designed and built all APIs, Facebook and Google OAuth, the subscription module and payment integration.'
+        'Delivered custom <strong>PHP, WordPress, WooCommerce and Magento</strong> sites end to end for clients in the UK, the US, Canada and Australia.',
+        'Migrated a life-sciences company from static HTML to <strong>WordPress</strong>, recreating <strong>several hundred pages</strong> with mapped 301 redirects, link monitoring and new lead-capture forms.',
+        'Built a WordPress <strong>multisite management plugin</strong> with one-click setup, domain mapping, cPanel integration and bulk theme and plugin activation.'
       ]
     },
     {
@@ -216,12 +213,14 @@ const CV = {
       location: 'Chandigarh, India',
       start: DATES.vertexStart,
       end: DATES.vertexEnd,
+      atsPoints: [
+        'Built custom <strong>core PHP</strong> and MySQL applications with payment gateway integrations, including an online estimate form of <strong>150+ fields</strong> with an admin workflow.',
+        'Developed <strong>WordPress</strong> sites with custom themes and plugins for client projects.'
+      ],
       points: [
-        'Led full external and intranet site deployments on Joomla from planning and setup through launch and post-deployment support, building a custom mooTree file-navigation extension, an intranet gallery component, Gantry template customization and a Google Maps location finder.',
-        'Consolidated a client\'s disparate static pages and dynamic fragments into a single Joomla codebase, integrating InfusionSoft and BeanStream payment APIs with Joomla membership objects and configuring the learning-management system.',
-        'Migrated a life-sciences company from static HTML to WordPress: recreated several hundred pages, transferred content and assets, mapped 301 redirects, monitored broken links and built new lead-capture forms.',
-        'Built a 150+ field online estimate form with admin-side capture and workflow for a moving-services client, and shipped a WordPress multisite management plugin with one-click setup, domain mapping, cPanel integration and bulk theme and plugin activation across child sites.',
-        'Delivered custom PHP, WordPress, Joomla, WooCommerce and Magento sites end to end for clients in the UK, the US, Canada, Australia and Germany, including theme and plugin development, third-party API integration, payment gateway setup (Authorize.net, PayPal, K-Net, BeanStream) and LAMP hosting, SSL and DNS.'
+        'Led external and intranet deployments on <strong>Joomla</strong> from planning through launch and post-deployment support, building custom extensions, components and template customizations.',
+        'Built custom <strong>PHP</strong> business sites, including a <strong>150+ field</strong> online estimate form with admin-side workflow.',
+        'Integrated payment gateways (Authorize.net, PayPal, InfusionSoft, BeanStream) and managed LAMP hosting, SSL and DNS.'
       ]
     }
   ],
@@ -245,18 +244,16 @@ const CV = {
      the keywords while making clear which have no project behind them, so an
      LLM asked "does he have Docker experience?" is not misled by a flat list. */
   skills: [
-    { group: 'Programming Languages', items: ['PHP 8', 'JavaScript (ES6+)', 'TypeScript', 'HTML5', 'CSS3', 'SQL'] },
-    { group: 'PHP Frameworks', items: ['Symfony 5', 'Symfony 4', 'Symfony 2'] },
-    { group: 'Ecommerce Platforms', items: ['Shopware 6', 'Shopware', 'Magento', 'WooCommerce', 'Shopify'] },
-    { group: 'Content Management Systems', items: ['WordPress', 'Joomla'] },
-    { group: 'Frontend', items: ['React.js', 'ReactJS', 'Redux', 'Redux-Saga', 'React Hooks', 'Angular', 'jQuery', 'Bootstrap', 'Material UI', 'Sass'] },
-    { group: 'Backend and APIs', items: ['Node.js', 'GraphQL', 'REST API', 'RESTful', 'Doctrine ORM', 'MVC'] },
-    { group: 'Databases', items: ['MySQL', 'MariaDB', 'MongoDB'] },
-    { group: 'Cloud and Infrastructure', items: ['AWS (Amazon Web Services)', 'Apache', 'LAMP', 'WAMP', 'SSL', 'DNS', 'SSH'] },
-    { group: 'Payments', items: ['Stripe', 'PayPal', 'Klarna', 'Payone', 'Braintree', 'Authorize.net', 'K-Net', 'BeanStream'] },
-    { group: 'Tools and Practices', items: ['Git', 'GitHub', 'GitLab', 'Bitbucket', 'JIRA', 'Agile', 'Scrum', 'Unit Testing', 'Code Review', 'Search Engine Optimization (SEO)'] },
-    { group: 'Industries', items: ['Ecommerce (e-commerce)', 'Fashion', 'Grocery', 'Furniture', 'Pharmaceutical', 'Food', 'Automotive Warranty', 'HR and Psychometrics', 'Consulting'] },
-    { group: 'Also worked with', items: ['Vue.js', 'Laravel', 'Next.js', 'Styled Components', 'Docker', 'CI/CD (Continuous Integration and Continuous Delivery)', 'Microsoft Azure', 'PostgreSQL', 'Microsoft SQL Server', 'Oracle', 'PrestaShop', 'OpenCart', 'Express.js', 'SOAP'] }
+    { group: 'Core Languages', items: ['PHP 8', 'Java', 'JavaScript (ES6+)', 'TypeScript', 'SQL', 'HTML5', 'CSS3'] },
+    { group: 'Backend Frameworks', items: ['Symfony', 'Symfony 5', 'Laravel', 'Laminas', 'Java Spring', 'Doctrine ORM', 'Node.js', 'Express.js', 'NestJS', 'MEAN Stack', 'MERN Stack', 'REST API', 'GraphQL', 'Microservices'] },
+    { group: 'AI and Voice', items: ['VAPI Voice AI', 'Bolna', 'LiveKit', 'AI Call Classification', 'Twilio Lookup', 'Nomorobo'] },
+    { group: 'Frontend', items: ['React.js', 'ReactJS', 'React 19', 'Next.js', 'Vite', 'Angular', 'Ionic', 'Redux', 'Redux-Saga', 'React Hooks', 'Material UI', 'jQuery', 'Bootstrap', 'Sass'] },
+    { group: 'Ecommerce and CMS', items: ['Shopware 6', 'Shopware', 'Twig', 'Magento', 'WooCommerce', 'Shopify', 'WordPress', 'Joomla'] },
+    { group: 'Databases', items: ['MySQL', 'MariaDB', 'MongoDB', 'PostgreSQL', 'Vector Database'] },
+    { group: 'Cloud and DevOps', items: ['AWS (Amazon Web Services)', 'Apache', 'LAMP', 'Git', 'GitHub', 'GitLab', 'Bitbucket', 'SSL', 'DNS'] },
+    { group: 'Payments', items: ['Stripe', 'PayPal', 'Klarna', 'Payone', 'Braintree', 'QuickPay', 'Authorize.net', 'BeanStream'] },
+    { group: 'Practices', items: ['Agile', 'Scrum', 'JIRA', 'Code Review', 'Unit Testing', 'Mentoring', 'Client Communication'] },
+    { group: 'Also worked with', items: ['Vue.js', 'Docker', 'CI/CD (Continuous Integration and Continuous Delivery)', 'Microsoft Azure', 'PrestaShop', 'OpenCart'] }
   ],
 
   /* Emitted to the .docx as one 'Leadership: ...' skills line, not as its own
@@ -285,7 +282,7 @@ const CV = {
     {
       category: 'Symfony & Enterprise',
       items: [
-        { name: 'schmetterling.de', url: 'https://schmetterling.de/', tags: ['Symfony', 'Angular', 'Microservices'], desc: 'Redeveloped microservices in Symfony with new components and an Angular UI. Owned the Campaign Master, Notes Management and Newsletter Unsubscriptions services.' },
+        { name: 'schmetterling.de', url: 'https://schmetterling.de/', tags: ['Symfony', 'Laminas', 'PostgreSQL', 'Microservices', 'Multi-tenant'], desc: 'Multi-tenant airline and hotel booking platform on Symfony and PostgreSQL. Built the Laminas microservices, new Symfony components and an Angular UI; owned the Campaign Master, Notes Management and Newsletter Unsubscriptions services.' },
         { name: 'locumbay.com', url: 'https://www.locumbay.com/', tags: ['Symfony', 'MySQL'], desc: 'Rebuilt an existing booking platform in Symfony with new modules, UI and workflow. Pharmacies post jobs and locums apply for part-time or permanent work; includes full reporting, invoices, statements, verification, messaging and notifications.' },
         { name: 'local-brand-x.com', url: 'https://www.local-brand-x.com/', tags: ['Symfony 5', 'Multi-tenant'], desc: 'Multi-tenant Symfony 5 platform with MySQL and several external services for additional functionality.' }
       ]
@@ -296,7 +293,7 @@ const CV = {
         { name: 'MSXI mWISE', url: 'https://www.msxi.com/en/mwise/', tags: ['React', 'TypeScript', 'Redux', 'Material UI'], desc: 'Warranty platform giving OEMs accuracy and transparency across importer audits and warranty assessments. Designed the security and queue pages, added search filters to the allocation, unallocated claims, roles and admin management tables, redesigned the profile page, wrote automated tests, and handled client communication and deployment.' },
         { name: 'XcooBee (Art of Living)', url: 'https://app.xcoobee.net/auth/login', tags: ['React', 'Node.js', 'GraphQL', 'MongoDB', 'React Native'], desc: 'Privacy-policy network portal with multi-user chat, high-security data sharing, cookie and consent management, QR scanning, a payment wizard and subscription packages. Also delivered the WordPress site, custom plugins, a React Native / Redux / GraphQL mobile portal and Braintree payments, plus specs, test strategies and code reviews.' },
         { name: 'Heritage Olympiad', url: null, tags: ['React', 'Redux', 'API design'], desc: 'Platform integrating heritage education into Indian schools. Built the front end and mockup design, designed and developed all APIs, implemented Facebook and Google login/signup, the subscription module and payment integration, plus automated tests and deployment.' },
-        { name: 'Talent Recognition', url: 'https://app.talent-recognition.com/', tags: ['React', 'Redux', 'Stripe', '.NET'], desc: 'Psychometric testing web app with admin and user roles. Implemented web-camera capture and PDF generation, Stripe payments, the partner onboarding process and React-Redux/Hooks state management; defined QA procedures and deployment.' },
+        { name: 'Talent Recognition', url: 'https://app.talent-recognition.com/', tags: ['React', 'Redux', 'Stripe'], desc: 'Psychometric testing web app with admin and user roles. Implemented web-camera capture and PDF generation, Stripe payments, the partner onboarding process and React-Redux/Hooks state management; defined QA procedures and deployment.' },
         { name: 'Guild', url: 'https://www.guild.im/', tags: ['React', 'Bootstrap'], desc: 'Virtual consulting firm platform for a client-reported network of 8,000+ vetted independent consultants. Built the front end and design to client needs, created the resource and project-posting features, and worked across both sides of the application.' },
         { name: 'triceraprint.com', url: 'https://triceraprint.com/', tags: ['React'], desc: 'Print software tool built in React.' }
       ]
@@ -352,18 +349,15 @@ const CV = {
     }
   ],
 
-  /* Web only — never emitted to the .docx, where 779 characters of bare domain
-     names carried zero skill keywords and read as keyword stuffing.
-     Three gambling-affiliate domains (casinobonuslister.com,
-     casinobonusbeater.com, allpokies.online) were removed outright: corporate
-     egress filters and ATS attachment scanners flag them, and a filtered
-     resume is dropped with no notification. */
+  /* Every other site from the source CVs, kept at Maninder's request. Printed
+     on the resume as one comma-separated 'Other websites delivered' line. */
   more: [
     'evergenius.com', 'honestdoctor.com', 'totumwealth.com', 'spasublime.com.au', 'realadvisor.ch',
     'canberraprecincts.com.au', 'cccapitalgrp.com', 'healthvision.de', 'illuminarla.com', 'sassaia.com',
     'fvcre.com', 'elevate.ca', 'telugu360.com', 'wpraffle.com', 'vont.com', 'obomovement.org',
     'avosys.com', 'focusmx.com', 'valcompliance.com', 'alconexfire.com.au', 'oceanatm.com',
-    'logixicf.com', 'essentialdesigns.net', 'adconnector.com', 'blackrock-websolutions.de',
+    'logixicf.com', 'essentialdesigns.net', 'casinobonuslister.com', 'casinobonusbeater.com',
+    'allpokies.online', 'adconnector.com', 'blackrock-websolutions.de',
     'ooe-gaertner.innpuls-secure.at', 'pforadio.com', 'coasterpedicab.com', 'pedicaboutdoor.com',
     'uniksy.com', 'thecorporatefilmguys.com', 'thecorporateeventguys.com', 'mytlcteam.com',
     'intuitiveip.com', 'ivyladder.com', 'janaflamelesscandles.com', 'jacksmagic.com',
@@ -372,10 +366,122 @@ const CV = {
 
   /* Decisions the .docx needs and the web page does not. */
   atsProfile: {
-    targetPages: 2,
-    wordBudget: 1300,
-    portfolioLine: 'Portfolio: 80+ additional websites and applications delivered across WordPress, Joomla, WooCommerce, Magento, Shopify and custom PHP for clients in the UK, US, Canada, Australia, Germany and Switzerland.',
-    portfolioUrl: 'https://maninder-dev.github.io/'
+    targetPages: 5,
+    wordBudget: 3200,
+    portfolioLine: 'More work: 80+ websites and applications delivered across WordPress, Joomla, WooCommerce, Magento, Shopify and custom PHP. Full portfolio:',
+    portfolioUrl: 'https://maninder-dev.github.io/',
+    /* Newest projects, listed first under Projects as their own category. */
+    featuredCategory: 'SaaS and Enterprise Platforms',
+    featured: ['missional', 'providerpassport', 'mca'],
+    /* Project categories left off the resume (still on the web page). */
+    hideCategories: ['Joomla', 'Custom PHP & Business Sites'],
+    /* Sites checked on 30 September 2026 that no longer exist (no DNS, 404,
+       502, parked, for sale, or now a different business). Left off the resume. */
+    offline: [
+      'alconexfire.com.au', 'battingcagesusa.com', 'canberraprecincts.com.au', 'casinobonuslister.com',
+      'cccapitalgrp.com', 'coasterpedicab.com', 'daniel-allen.net', 'dxbwebsite.com', 'ecftech.com.br',
+      'elevate.ca', 'eperfectsolutions.com', 'essentialdesigns.net', 'fabearseco.com', 'focusmx.com',
+      'freelimitedcompany.com', 'ivyladder.com', 'janaflamelesscandles.com', 'movingwithgrace.ca',
+      'mytlcteam.com', 'naturus.com', 'neviahomehub.com', 'nexcelom.com', 'pedicaboutdoor.com',
+      'pforadio.com', 'thecorporateeventguys.com', 'theregisteredoffice.com', 'thought-bomb.net',
+      'uniksy.com', 'vont.com'
+    ],
+    /* Real products whose public URL is gone: listed without a link. */
+    unlink: ['MSXI mWISE', 'XcooBee (Art of Living)', 'Talent Recognition'],
+    /* Shorter resume descriptions (the web page keeps the full text). */
+    shortDesc: {
+      'MSXI mWISE': 'Warranty platform for vehicle manufacturers covering importer audits and warranty assessments. Built the security and queue pages, table search filters and automated tests.',
+      'Heritage Olympiad': 'Platform bringing heritage education into Indian schools. Built the front end and all APIs, Facebook and Google login, subscriptions and payment integration.',
+      'XcooBee (Art of Living)': 'Privacy and consent network portal with multi-user chat, secure data sharing, a payment wizard and a React Native mobile app, plus specs and code reviews.'
+    }
+  },
+
+  /* Resume Projects section, in the reference layout: title, one-line
+     description, Tech Stack, My Role bullets. Each variant picks and orders
+     these by key (atsVariants[*].projects). Facts come from the source CVs
+     and from what Maninder has described directly. */
+  atsProjects: {
+    missional: {
+      title: 'MissionalAgents - AI Phone Receptionist SaaS for Churches',
+      brief: 'MissionalAgents, a multi-tenant AI phone-receptionist SaaS for churches. A VAPI voice AI agent answers the phone line of each church, classifies calls by topic, answers from a church-specific Knowledge Engine and transfers live or takes a message. Built staff email notifications with per-contact frequency and spam screening with Nomorobo and Twilio Lookup',
+      links: [{ label: 'app.missionalagents.com', url: 'https://app.missionalagents.com/' }],
+      desc: 'Multi-tenant SaaS where a VAPI voice AI agent answers the inbound phone line of each church, classifies the call by topic, answers from a church-specific Knowledge Engine, and transfers live or takes a message per topic.',
+      tech: ['React 19', 'Vite', 'TypeScript', 'VAPI Voice AI', 'Twilio', 'Nomorobo', 'REST API'],
+      role: [
+        'Built <strong>staff email notifications</strong> with a per-contact frequency setting (every call, daily, weekly or never).',
+        'Worked with per-topic call routing (live transfer during work hours or message capture), Knowledge Engine onboarding data, and spam screening via <strong>Nomorobo and Twilio Lookup</strong>.'
+      ]
+    },
+    providerpassport: {
+      title: 'Provider Passport - Healthcare Provider Credentialing Platform',
+      brief: 'Provider Passport, a healthcare credentialing platform. Built Angular and Java Spring features for managing hospital, clinic, doctor, nurse and staff records, and the patient and provider data each insurance company requires',
+      links: [{ label: 'providerpassport.io', url: 'https://www.providerpassport.io/' }],
+      desc: 'Platform that manages records for hospitals, clinics, doctors, nurses and other staff, together with the patient and provider data each insurance company requires.',
+      tech: ['Angular', 'Java', 'Spring Framework', 'REST API', 'TypeScript'],
+      role: [
+        'Developed features across the <strong>Angular</strong> front end and the <strong>Java Spring</strong> REST back end.',
+        'Built record management for <strong>hospitals, clinics, doctors, nurses and staff</strong>, and the configurable <strong>insurance data requirements</strong> for each insurer.'
+      ]
+    },
+    mca: {
+      title: 'MCA - Retail Product Survey Platform',
+      brief: 'MCA retail product survey platform with four role-based apps (staff.mca.ca, fieldrep.mca.ca, superadmin.mca.ca and client admin). Built the Angular portals and the Ionic surveyor mobile app for survey jobs shared by client admins',
+      links: [
+        { label: 'staff.mca.ca', url: 'https://staff.mca.ca/' },
+        { label: 'fieldrep.mca.ca', url: 'https://fieldrep.mca.ca/' },
+        { label: 'superadmin.mca.ca', url: 'https://superadmin.mca.ca/' }
+      ],
+      desc: 'Supermarket product-survey platform with four role-based apps: field surveyors on a mobile app, client admins who publish survey jobs, staff, and a super admin who manages all clients.',
+      tech: ['Angular', 'Ionic', 'TypeScript', 'REST API', 'Role-based Access Control'],
+      role: [
+        'Developed the <strong>four role-based applications</strong> (staff portal, field-rep app, client admin and super admin) in <strong>Angular</strong>.',
+        'Built the surveyor <strong>Ionic mobile app</strong> for field submission of survey jobs shared by client admins, with super-admin oversight of every client.'
+      ]
+    },
+    shopware: {
+      title: 'Shopware eCommerce Storefronts - German Retail Clients',
+      covers: ['koffer-to-go.de', 'frostkrone.de', 'meentzen.de', 'rbb-online-shop.de'],
+      desc: 'Storefronts for German retail brands including koffer-to-go.de, frostkrone.de, meentzen.de and rbb-online-shop.de.',
+      tech: ['Shopware 6', 'Symfony', 'PHP 8', 'Twig', 'MySQL', 'JavaScript'],
+      role: [
+        'Built <strong>meentzen.de</strong> and <strong>frostkrone.de</strong> from scratch as fully responsive storefronts with custom themes.',
+        'Developed custom <strong>plugins and modules</strong> extending catalog browsing, checkout, shipping options and customer accounts.',
+        'Delivered <strong>koffer-to-go.de</strong> on Shopware 6 with secure payments, shipping configuration and account management.'
+      ]
+    },
+    schmetterling: {
+      title: 'Schmetterling - Flight and Hotel Booking Platform',
+      covers: ['schmetterling.de'],
+      links: [{ label: 'schmetterling.de', url: 'https://schmetterling.de/' }],
+      desc: 'Multi-tenant airline and hotel booking platform built on Symfony and PostgreSQL, with a microservices back end.',
+      tech: ['Symfony', 'Laminas', 'PHP', 'PostgreSQL', 'Microservices', 'Multi-tenancy', 'Angular', 'REST API'],
+      role: [
+        'Built the <strong>Laminas microservices</strong> alongside the multi-tenant <strong>Symfony</strong> application on <strong>PostgreSQL</strong>, plus new Symfony components and the <strong>Angular</strong> interface.',
+        'Owned the <strong>Campaign Master, Notes Management and Newsletter Unsubscription</strong> services end to end.'
+      ]
+    },
+    mwise: {
+      title: 'mWISE - Warranty Management Platform (MSX International)',
+      covers: ['MSXI mWISE'],
+      desc: 'Warranty platform giving vehicle manufacturers accuracy and transparency across importer audits and warranty assessments.',
+      tech: ['React', 'TypeScript', 'Redux', 'Redux-Saga', 'Material UI', 'REST API'],
+      role: [
+        'Designed and built the <strong>security and queue pages</strong> and redesigned the profile page.',
+        'Added search and filtering across the allocation, unallocated-claims, roles and admin-management tables.',
+        'Wrote <strong>automated tests</strong> and handled client communication and deployment.'
+      ]
+    },
+    xcoobee: {
+      title: 'XcooBee - Privacy and Consent Management Portal',
+      covers: ['XcooBee (Art of Living)'],
+      desc: 'Privacy network portal with multi-user chat, secure data sharing, cookie and consent management and subscription packages.',
+      tech: ['React', 'Node.js', 'GraphQL', 'MongoDB', 'React Native', 'Braintree'],
+      role: [
+        'Built consent management, QR scanning and the <strong>payment wizard</strong> with Braintree subscriptions.',
+        'Delivered a <strong>React Native</strong> mobile portal with Redux and GraphQL.',
+        'Authored technical specifications and test strategy, and performed code reviews.'
+      ]
+    }
   },
 
   dates: DATES

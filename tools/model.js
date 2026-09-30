@@ -1,161 +1,146 @@
 /* ------------------------------------------------------------------
    tools/model.js
 
-   Turns cv-data.js into a flat, variant-aware ATS document model:
-   an ordered array of { kind, text, ... } records. build-docx.js and
-   build-txt.js BOTH consume this array and nothing else — neither
-   file contains a single literal template string of its own. That is
-   what makes the shipped .txt a genuine parse-fidelity proof against
-   the .docx rather than a tautology: if a record's text ever relied
-   on something a .docx-only mechanism could mangle (a table cell
-   boundary, a <w:br/>), the .txt would show the same mangled text,
-   and the drift check in verify-docx.sh would still pass — so the
-   real defence is that this file never emits a table, a <w:br/>, or
-   a middot in the first place.
+   Turns cv-data.js into an ordered, variant-aware list of layout
+   records. build-docx.js and build-txt.js BOTH render this list and
+   contain no resume text of their own, which is what makes diffing
+   the .docx text stream against the .txt a real fidelity check.
+
+   Text fields may contain <strong>...</strong>: the .docx renders it
+   as bold runs, the .txt strips it.
 
    Record kinds:
-     heading   { text }                         -> Heading2, own paragraph
-     subhead   { text }                         -> Heading3, own paragraph
-     para      { text }                         -> plain paragraph
-     bullets   { items: [text, ...] }           -> one numbered list
-     hyperline { label, url }                   -> plain paragraph, bare
-                                                    domain as hyperlink text
+     header    { name, headline, contacts: [{ text, url }] }
+     heading   { text }                         section title
+     para      { text }
+     bullets   { items: [text] }
+     skill     { label, items: [text] }         'Label: a, b, c'
+     jobhead   { title, dates, org }            title ...... dates / org
+     project   { title, links: [{ label, url }], desc, tech: [], role: [] }
+     link      { text, label, url }             text + hyperlinked label
+     subgroup  { text }                         small group title
+     linkbullets { items: [{ label, url, text }] }  bullet: linked name + text
    ------------------------------------------------------------------ */
 
 const path = require('path');
 const { CV, fmtRange } = require(path.join(__dirname, '..', 'cv-data.js'));
 
-/* Words a bare '&' would block a degree/heading dictionary lookup on --
-   already avoided at the source in cv-data.js, asserted here so a future
-   edit to cv-data.js can't silently reintroduce one. */
-function assertNoAmpersandInHeadings(headings) {
-  headings.forEach((h) => {
-    if (h.includes('&')) throw new Error(`Heading "${h}" contains '&' — breaks heading-dictionary matching`);
-  });
-}
+const HEADINGS = ['Summary', 'Technical Skills', 'Work Experience', 'Projects', 'Education'];
 
-const HEADINGS = ['Professional Summary', 'Technical Skills', 'Professional Experience', 'Projects', 'Education'];
-assertNoAmpersandInHeadings(HEADINGS);
-
-/* Strip the <strong> tags cv-data.js uses for web emphasis. The .docx
-   applies bold via run styling elsewhere (job company names, headings) —
-   summary emphasis doesn't need to survive into the text stream, and
-   leaving the tags in would put literal angle brackets in the resume. */
-function stripTags(s) {
+function plain(s) {
   return String(s).replace(/<\/?strong>/g, '');
 }
 
-/* One 'Label: a, b, c' line per skills group. No middot, no '/' inside an
-   item (some tokenizers split on '/' and some don't), no terminal period. */
-function skillsLines(skillGroups) {
-  return skillGroups.map((g) => `${g.group}: ${g.items.join(', ')}`);
+/* Split 'a <strong>b</strong> c' into [{text:'a ', bold:false}, {text:'b', bold:true}, ...]. */
+function runs(s) {
+  const out = [];
+  String(s).split(/(<strong>.*?<\/strong>)/g).forEach((part) => {
+    if (!part) return;
+    const m = part.match(/^<strong>(.*)<\/strong>$/);
+    out.push(m ? { text: m[1], bold: true } : { text: part, bold: false });
+  });
+  return out;
 }
 
-/* Employer line: title, company, location, then a pipe and the date range —
-   see cv-data.js fmtRange. Comma-separated first three fields is the
-   highest-confidence separator for resume-parsing vendors; the pipe before
-   the dates is never mistaken for a range separator, unlike an em dash. */
-function employerLine(job) {
-  return `${job.role}, ${job.company}, ${job.location} | ${fmtRange(job)}`;
+function contacts() {
+  const pick = (label) => CV.contact.find((c) => c.label === label && !c.placeholder);
+  return ['Phone', 'Email', 'LinkedIn', 'Location']
+    .map(pick)
+    .filter(Boolean)
+    .map((c) => ({
+      text: c.ats || c.value,
+      url: c.href && !c.href.startsWith('tel:') ? c.href : null
+    }));
 }
 
-function educationLine(e) {
-  return `${e.degree}, ${e.school} (${e.university}), ${e.location} | ${e.gradYear}`;
-}
-
-/* Six featured Shopware projects: tech front-loaded (not the domain), no
-   [bracketed] tags — brackets are frequently stripped as markup by resume
-   normalisers, which is exactly where the old document buried its most
-   valuable per-project keywords. */
-function shopwareProjectLine(p) {
-  return `${p.name} - ${p.atsTech}: ${p.atsDesc}.`;
-}
-
-/* Build the flat record list for one named variant ('master' | 'shopware' |
-   'product' | 'services'). Returns { records, contactLine1, contactLine2,
-   headline, meta } — build-docx.js and build-txt.js both take this shape. */
 function buildModel(variantName) {
   const variant = CV.atsVariants[variantName];
   if (!variant) throw new Error(`Unknown ATS variant "${variantName}"`);
 
-  const shopwareItems = CV.projects
-    .find((c) => c.category === 'Shopware & eCommerce')
-    .items.filter((p) => p.featured);
-
-  const skillGroups = CV.skills.concat([{ group: 'Leadership', items: CV.leadership }]);
-
-  const summaryParas = CV.summary.map(stripTags);
-
-  const sectionBuilders = {
-    summary: () => [{ kind: 'heading', text: 'Professional Summary' }]
-      .concat(summaryParas.map((text) => ({ kind: 'para', text }))),
+  const sections = {
+    summary: () => [{ kind: 'heading', text: 'Summary' }]
+      .concat((CV.atsSummary ? [CV.atsSummary] : CV.summary).map((text) => ({ kind: 'para', text }))),
 
     skills: () => [{ kind: 'heading', text: 'Technical Skills' }]
-      .concat(skillsLines(skillGroups).map((line) => ({ kind: 'para', text: line }))),
+      .concat(CV.skills.map((g) => ({ kind: 'skill', label: g.group, items: g.items }))),
 
     experience: () => {
-      const out = [{ kind: 'heading', text: 'Professional Experience' }];
+      const out = [{ kind: 'heading', text: 'Work Experience' }];
       CV.experience.forEach((job) => {
-        out.push({ kind: 'subhead', text: employerLine(job) });
-        out.push({ kind: 'bullets', items: job.points });
+        out.push({ kind: 'jobhead', title: job.role, dates: fmtRange(job), org: `${job.company}, ${job.location}` });
+        out.push({ kind: 'bullets', items: job.atsPoints || job.points });
       });
       return out;
     },
 
-    projects: () => [
-      { kind: 'heading', text: 'Projects' },
-      { kind: 'subhead', text: 'Selected Shopware and eCommerce Builds' },
-      { kind: 'bullets', items: shopwareItems.map((p) => shopwareProjectLine(p)) },
-      { kind: 'para', text: CV.atsProfile.portfolioLine },
-      { kind: 'hyperline', label: 'maninder-dev.github.io', url: CV.atsProfile.portfolioUrl }
-    ],
+    /* One Projects section in the category layout: the newest projects as
+       their own category first, then the web page categories. Hidden
+       categories and offline sites are left out; dead product links are
+       dropped but the product stays. */
+    projects: () => {
+      const P = CV.atsProfile;
+      const offline = new Set(P.offline);
+      const host = (u) => (u ? u.replace(/^https?:\/\/(www\.)?/, '').replace(/\/.*$/, '') : null);
+      const isOffline = (p) => offline.has(p.name.replace(/^www\./, '')) || offline.has(host(p.url));
+      const cats = [{
+        category: P.featuredCategory,
+        items: P.featured.map((k) => {
+          const p = CV.atsProjects[k];
+          if (!p) throw new Error(`Unknown featured project "${k}"`);
+          return { label: p.links[0].label, url: p.links[0].url, text: `${p.brief} (${p.tech.join(', ')})` };
+        })
+      }].concat(CV.projects
+        .filter((c) => !P.hideCategories.includes(c.category))
+        .map((c) => ({
+          category: c.category,
+          items: c.items.filter((p) => !isOffline(p)).map((p) => ({
+            label: p.name,
+            url: P.unlink.includes(p.name) ? null : p.url,
+            text: `${(P.shortDesc || {})[p.name] || p.desc} (${p.tags.join(', ')})`
+          }))
+        })));
+      const lead = cats.findIndex((c) => c.category === variant.leadCategory);
+      if (lead > 0) cats.unshift(cats.splice(lead, 1)[0]);
 
-    education: () => [
-      { kind: 'heading', text: 'Education' },
-      { kind: 'para', text: educationLine(CV.education[0]) }
-    ]
+      const out = [{ kind: 'heading', text: 'Projects' }];
+      cats.forEach((c) => {
+        if (!c.items.length) return;
+        out.push({ kind: 'subgroup', text: c.category.replace(/&/g, 'and') });
+        out.push({ kind: 'linkbullets', items: c.items });
+      });
+      return out;
+    },
+
+    education: () => {
+      const e = CV.education[0];
+      return [
+        { kind: 'heading', text: 'Education' },
+        { kind: 'jobhead', title: e.degree, dates: e.gradYear || '', org: `${e.school} (${e.university}), ${e.location}` }
+      ];
+    }
   };
 
-  const records = [];
+  const records = [{
+    kind: 'header',
+    name: CV.name,
+    headline: variant.headline,
+    contacts: contacts()
+  }];
   variant.sections.forEach((key) => {
-    const build = sectionBuilders[key];
-    if (!build) throw new Error(`Unknown section "${key}" in variant "${variantName}"`);
-    records.push(...build());
+    if (!sections[key]) throw new Error(`Unknown section "${key}" in variant "${variantName}"`);
+    records.push(...sections[key]());
   });
-
-  const contactPrimary = CV.contact
-    .filter((c) => ['Location', 'Phone', 'Email'].includes(c.label))
-    .map((c) => c.ats || c.value)
-    .join(' | ');
-  const contactLinks = CV.contact
-    .filter((c) => ['LinkedIn', 'GitHub', 'Portfolio'].includes(c.label))
-    .map((c) => c.value)
-    .join(' | ');
 
   return {
     records,
-    name: CV.name,
-    headline: variant.headline,
-    contactPrimary,
-    contactLinks,
     fileBase: variant.file,
     datesEstimated: CV.dates.datesEstimated
   };
 }
 
-module.exports = { buildModel, stripTags, skillsLines, employerLine, educationLine, shopwareProjectLine, HEADINGS };
+module.exports = { buildModel, plain, runs, HEADINGS };
 
 if (require.main === module) {
-  const which = process.argv[2] || 'master';
-  const m = buildModel(which);
-  console.log(`=== ${which} -> ${m.fileBase} ===`);
-  console.log(m.name);
-  console.log(m.headline);
-  console.log(m.contactPrimary);
-  console.log(m.contactLinks);
-  m.records.forEach((r) => {
-    if (r.kind === 'bullets') r.items.forEach((it) => console.log('  * ' + it));
-    else if (r.kind === 'hyperline') console.log(`[link] ${r.label} -> ${r.url}`);
-    else console.log(`[${r.kind}] ${r.text}`);
-  });
+  const { renderVariant } = require('./build-txt.js');
+  process.stdout.write(renderVariant(process.argv[2] || 'master'));
 }
