@@ -2,7 +2,7 @@ Maninder Singh
 Senior Full Stack Engineer
 +91 98728 52673 | maninder6005@gmail.com | linkedin.com/in/maninder0000 | Mohali, Punjab, India
 Summary
-Senior Software Engineer with 13 years of experience building production web applications in PHP 8, Laravel and Symfony, with modern front ends in React.js, TypeScript and Angular. Specializes in Shopware 6 eCommerce, Symfony microservices and multi-tenant platforms for clients in Germany, the UK, the US, Canada and Australia. Currently building an AI voice-receptionist SaaS with React 19 and VAPI. Mentors junior developers and owns client delivery from requirements to release in Agile Scrum.
+Senior Software Engineer with 11 years of experience building production web applications in PHP 8, Laravel and Symfony, with modern front ends in React.js, TypeScript and Angular. Specializes in Shopware 6 eCommerce, Symfony microservices and multi-tenant platforms for clients in Germany, the UK, the US, Canada and Australia. Currently building an AI voice-receptionist SaaS with React 19 and VAPI. Mentors junior developers and owns client delivery from requirements to release in Agile Scrum.
 Technical Skills
 Core Languages: PHP 8, Java, JavaScript (ES6+), TypeScript, SQL, HTML5, CSS3
 Backend Frameworks: Symfony, Symfony 5, Laravel, Laminas, Java Spring, Doctrine ORM, Node.js, Express.js, NestJS, MEAN Stack, MERN Stack, REST API, GraphQL, Microservices
@@ -26,10 +26,7 @@ Senior Software Developer	October 2015 - January 2017
 Maven Softwares, Mohali, Punjab, India
 Built Laravel web applications and REST APIs for clients in 4 countries (UK, US, Canada, Australia).
 Developed custom WordPress themes, plugins and WooCommerce stores, and migrated a life-sciences site of several hundred pages from static HTML with mapped 301 redirects.
-Software Developer	July 2013 - September 2015
-Vertex Info Solutions, Chandigarh, India
-Built custom core PHP and MySQL applications with payment gateway integrations, including an online estimate form of 150+ fields with an admin workflow.
-Developed WordPress sites with custom themes and plugins for client projects.
+Built a WordPress multisite management plugin (wpempirebuilder.com) with one-click setup, domain mapping, cPanel integration and bulk theme and plugin activation.
 Projects
 SaaS and Enterprise Platforms
 app.missionalagents.com: MissionalAgents, a multi-tenant AI phone-receptionist SaaS for churches. A VAPI voice AI agent answers the phone line of each church, classifies calls by topic, answers from a church-specific Knowledge Engine and transfers live or takes a message. Built staff email notifications with per-contact frequency and spam screening with Nomorobo and Twilio Lookup (React 19, Vite, TypeScript, VAPI Voice AI, Twilio, Nomorobo, REST API)

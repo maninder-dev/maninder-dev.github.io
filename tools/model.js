@@ -66,7 +66,7 @@ function buildModel(variantName) {
 
     experience: () => {
       const out = [{ kind: 'heading', text: 'Work Experience' }];
-      CV.experience.forEach((job) => {
+      CV.experience.filter((job) => !(CV.atsProfile.hideJobs || []).includes(job.company)).forEach((job) => {
         out.push({ kind: 'jobhead', title: job.role, dates: fmtRange(job), org: `${job.company}, ${job.location}` });
         out.push({ kind: 'bullets', items: job.atsPoints || job.points });
       });

@@ -52,6 +52,12 @@ function yearsExperience(asOf) {
 
 const YEARS = yearsExperience();
 
+/* Years shown on the resume. Vertex is hidden there (atsProfile.hideJobs), so
+   the resume counts from Maven, the earliest job it lists: a checker that
+   adds up the dated jobs gets the same number the summary states. Rounded to
+   the nearest year, as checkers do. */
+const ATS_YEARS = Math.round((new Date() - new Date(DATES.mavenStart + '-01T00:00:00Z')) / (365.2425 * 24 * 3600 * 1000));
+
 /* ------------------------------------------------------------------ */
 
 const CV = {
@@ -89,7 +95,7 @@ const CV = {
     },
     services: {
       file: 'Maninder-Singh-Senior-Software-Engineer-IN',
-      headline: 'Senior Software Engineer | ' + YEARS + '+ Years',
+      headline: 'Senior Software Engineer | ' + ATS_YEARS + ' Years',
       sections: ['summary', 'skills', 'experience', 'projects', 'education']
     }
   },
@@ -119,7 +125,7 @@ const CV = {
 
   /* Resume summary: one short paragraph, since resume checkers flag long
      summaries. The web page keeps the longer three-paragraph `summary`. */
-  atsSummary: 'Senior Software Engineer with <strong>' + YEARS + ' years of experience</strong> building production web applications in <strong>PHP 8, Laravel and Symfony</strong>, with modern front ends in <strong>React.js, TypeScript and Angular</strong>. Specializes in <strong>Shopware 6 eCommerce</strong>, Symfony microservices and multi-tenant platforms for clients in Germany, the UK, the US, Canada and Australia. Currently building an AI voice-receptionist SaaS with React 19 and VAPI. Mentors junior developers and owns client delivery from requirements to release in Agile Scrum.',
+  atsSummary: 'Senior Software Engineer with <strong>' + ATS_YEARS + ' years of experience</strong> building production web applications in <strong>PHP 8, Laravel and Symfony</strong>, with modern front ends in <strong>React.js, TypeScript and Angular</strong>. Specializes in <strong>Shopware 6 eCommerce</strong>, Symfony microservices and multi-tenant platforms for clients in Germany, the UK, the US, Canada and Australia. Currently building an AI voice-receptionist SaaS with React 19 and VAPI. Mentors junior developers and owns client delivery from requirements to release in Agile Scrum.',
 
   /* <strong> renders bold on the web AND as bold runs in the .docx; the .txt
      strips it. Three paragraphs, matching the reference layout. */
@@ -199,7 +205,8 @@ const CV = {
       end: DATES.mavenEnd,
       atsPoints: [
         'Built <strong>Laravel</strong> web applications and REST APIs for clients in <strong>4 countries</strong> (UK, US, Canada, Australia).',
-        'Developed custom <strong>WordPress</strong> themes, plugins and WooCommerce stores, and migrated a life-sciences site of <strong>several hundred pages</strong> from static HTML with mapped 301 redirects.'
+        'Developed custom <strong>WordPress</strong> themes, plugins and WooCommerce stores, and migrated a life-sciences site of <strong>several hundred pages</strong> from static HTML with mapped 301 redirects.',
+        'Built a WordPress <strong>multisite management plugin</strong> (wpempirebuilder.com) with one-click setup, domain mapping, cPanel integration and bulk theme and plugin activation.'
       ],
       points: [
         'Delivered custom <strong>PHP, WordPress, WooCommerce and Magento</strong> sites end to end for clients in the UK, the US, Canada and Australia.',
@@ -373,6 +380,8 @@ const CV = {
     /* Newest projects, listed first under Projects as their own category. */
     featuredCategory: 'SaaS and Enterprise Platforms',
     featured: ['missional', 'providerpassport', 'mca'],
+    /* Jobs left off the resume (still on the web page). */
+    hideJobs: ['Vertex Info Solutions'],
     /* Project categories left off the resume (still on the web page). */
     hideCategories: ['Joomla', 'Custom PHP & Business Sites'],
     /* Sites checked on 30 September 2026 that no longer exist (no DNS, 404,

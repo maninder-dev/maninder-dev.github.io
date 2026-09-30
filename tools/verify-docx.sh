@@ -39,7 +39,7 @@ ck "no field codes"       "$(n "$X" '<w:fldChar\|<w:instrText')" 0
 ck "no multi-column"      "$(n "$X" '<w:cols[^>]*w:num=')" 0
 
 # Tabs: exactly one per dated header line (3 jobs + 1 education), none elsewhere.
-EXPECTED_TABS=$(node -e "const {CV}=require('$HERE/../cv-data.js'); console.log(CV.experience.length + CV.education.filter(e => e.gradYear).length)")
+EXPECTED_TABS=$(node -e "const {CV}=require('$HERE/../cv-data.js'); console.log(CV.experience.filter(j => !(CV.atsProfile.hideJobs||[]).includes(j.company)).length + CV.education.filter(e => e.gradYear).length)")
 ck "tabs only on dated headers" "$(n "$X" '<w:tab/>')" "$EXPECTED_TABS"
 
 # --- headings, bullets, links ---
@@ -66,9 +66,10 @@ for h in "Summary" "Technical Skills" "Work Experience" "Projects" "Education"; 
     || { echo "FAIL  heading '$h' absent or not alone on its line"; fail=1; }
 done
 
+JOBS=$(node -e "const {CV}=require('$HERE/../cv-data.js'); console.log(CV.experience.filter(j => !(CV.atsProfile.hideJobs||[]).includes(j.company)).length)")
 # --- dates: title and range on one line, separated by whitespace even with the tab dropped ---
 M='(January|February|March|April|May|June|July|August|September|October|November|December)'
-ck "dated job lines" "$(printf '%s' "$TXT" | grep -cE "^[A-Z][A-Za-z ]+ +$M [0-9]{4} - ($M [0-9]{4}|Present)$")" 3
+ck "dated job lines" "$(printf '%s' "$TXT" | grep -cE "^[A-Z][A-Za-z ]+ +$M [0-9]{4} - ($M [0-9]{4}|Present)$")" "$JOBS"
 ck "exactly one 'Present'" "$(printf '%s' "$TXT" | grep -c 'Present')" 1
 printf '%s' "$TXT" | grep -qE "^Senior Software Engineer +$M [0-9]{4} - Present$" \
   && echo "PASS  current role line" || { echo "FAIL  current role line"; fail=1; }
