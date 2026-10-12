@@ -11,17 +11,18 @@
 
 /* Employment dates, from Maninder's LinkedIn profile (September 2026).
    Earlier non-developer roles (Computer Operator, VK Enterprises, 2011-12;
-   Executive Assistant, Jaison Exports, 2012) are left off the resume.
+   Executive Assistant, Jaison Exports, 2012) are left off the resume, and
+   Vertex Info Solutions (Software Developer, July 2013 - September 2015) is
+   left off both the resume and the web page at Maninder's request (October
+   2026), so experience is counted from Maven.
    gradYear from Maninder (September 2026). */
 const DATES = {
   datesEstimated: false,
   orionStart: '2017-02',
   mavenStart: '2015-10',
   mavenEnd: '2017-01',
-  vertexStart: '2013-07',
-  vertexEnd: '2015-09',
   gradYear: '2011',
-  careerStart: '2013-07'
+  careerStart: '2015-10'
 };
 
 /* ---------------------------- date helpers ---------------------------- */
@@ -52,12 +53,6 @@ function yearsExperience(asOf) {
 
 const YEARS = yearsExperience();
 
-/* Years shown on the resume. Vertex is hidden there (atsProfile.hideJobs), so
-   the resume counts from Maven, the earliest job it lists: a checker that
-   adds up the dated jobs gets the same number the summary states. Rounded to
-   the nearest year, as checkers do. */
-const ATS_YEARS = Math.round((new Date() - new Date(DATES.mavenStart + '-01T00:00:00Z')) / (365.2425 * 24 * 3600 * 1000));
-
 /* ------------------------------------------------------------------ */
 
 const CV = {
@@ -80,14 +75,14 @@ const CV = {
     fullstack: {
       file: 'Maninder-Singh-Full-Stack-Developer',
       headline: 'Senior Full Stack Developer',
-      summary: 'Senior Full Stack Developer with <strong>' + ATS_YEARS + ' years of experience</strong> building production web applications end to end: back ends in <strong>PHP 8, Laravel, Symfony and Node.js</strong>, front ends in <strong>React, Next.js, TypeScript and Angular</strong>. Delivers multi-tenant SaaS platforms, REST and GraphQL APIs, MEAN and MERN stack applications and Shopware 6 eCommerce for clients in Germany, the UK, the US, Canada and Australia. Currently building an AI voice-receptionist SaaS. Leads code reviews and mentors junior developers in Agile Scrum.',
+      summary: 'Senior Full Stack Developer with <strong>' + YEARS + ' years of experience</strong> building production web applications end to end: back ends in <strong>PHP 8, Laravel, Symfony and Node.js</strong>, front ends in <strong>React, Next.js, TypeScript and Angular</strong>. Delivers multi-tenant SaaS platforms, REST and GraphQL APIs, MEAN and MERN stack applications and Shopware 6 eCommerce for clients in Germany, the UK, the US, Canada and Australia. Currently building an AI voice-receptionist SaaS. Leads code reviews and mentors junior developers in Agile Scrum.',
       coreSkills: { group: 'Full Stack', items: ['PHP 8', 'Laravel', 'Symfony', 'Node.js', 'React.js', 'Next.js', 'Angular', 'TypeScript', 'MySQL', 'MongoDB', 'REST API', 'GraphQL'] },
       sections: ['summary', 'skills', 'experience', 'projects', 'education']
     },
     mean: {
       file: 'Maninder-Singh-MEAN-Stack-Developer',
       headline: 'Senior MEAN Stack Developer',
-      summary: 'Senior MEAN Stack Developer with <strong>' + ATS_YEARS + ' years of experience</strong> building production web applications in <strong>MongoDB, Express.js, Angular and Node.js</strong> with TypeScript, plus PHP back ends in <strong>Laravel and Symfony</strong>. Built Angular platforms for healthcare provider credentialing and a 4-role retail survey system with an Ionic mobile app, Angular front ends for a multi-tenant flight and hotel booking platform, and REST and GraphQL APIs on Node.js. Works with clients in Germany, the UK, the US, Canada and Australia, leads code reviews and mentors junior developers.',
+      summary: 'Senior MEAN Stack Developer with <strong>' + YEARS + ' years of experience</strong> building production web applications in <strong>MongoDB, Express.js, Angular and Node.js</strong> with TypeScript, plus PHP back ends in <strong>Laravel and Symfony</strong>. Built Angular platforms for healthcare provider credentialing and a 4-role retail survey system with an Ionic mobile app, Angular front ends for a multi-tenant flight and hotel booking platform, and REST and GraphQL APIs on Node.js. Works with clients in Germany, the UK, the US, Canada and Australia, leads code reviews and mentors junior developers.',
       coreSkills: { group: 'MEAN Stack', items: ['MongoDB', 'Express.js', 'Angular', 'Node.js', 'TypeScript', 'Ionic', 'REST API', 'GraphQL'] },
       skillOrder: ['Frontend', 'Backend Frameworks', 'Databases'],
       featured: ['providerpassport', 'mca', 'missional'],
@@ -96,7 +91,7 @@ const CV = {
     mern: {
       file: 'Maninder-Singh-MERN-Stack-Developer',
       headline: 'Senior MERN Stack Developer',
-      summary: 'Senior MERN Stack Developer with <strong>' + ATS_YEARS + ' years of experience</strong> building production web applications in <strong>MongoDB, Express.js, React and Node.js</strong> with TypeScript, Next.js and Redux. Built React front ends for <strong>7 products</strong>, including an AI voice-receptionist SaaS and a consulting platform serving 8,000+ consultants, and a privacy and consent portal on Node.js, GraphQL and MongoDB with a React Native app. Also ships PHP back ends in Laravel and Symfony, and works with clients in Germany, the UK, the US, Canada and Australia.',
+      summary: 'Senior MERN Stack Developer with <strong>' + YEARS + ' years of experience</strong> building production web applications in <strong>MongoDB, Express.js, React and Node.js</strong> with TypeScript, Next.js and Redux. Built React front ends for <strong>7 products</strong>, including an AI voice-receptionist SaaS and a consulting platform serving 8,000+ consultants, and a privacy and consent portal on Node.js, GraphQL and MongoDB with a React Native app. Also ships PHP back ends in Laravel and Symfony, and works with clients in Germany, the UK, the US, Canada and Australia.',
       coreSkills: { group: 'MERN Stack', items: ['MongoDB', 'Express.js', 'React.js', 'Node.js', 'Next.js', 'TypeScript', 'Redux', 'React Native', 'REST API', 'GraphQL'] },
       skillOrder: ['Frontend', 'Backend Frameworks', 'Databases'],
       featured: ['missional', 'providerpassport', 'mca'],
@@ -106,7 +101,7 @@ const CV = {
     shopware: {
       file: 'Maninder-Singh-Shopware-Developer',
       headline: 'Senior Shopware Developer | eCommerce Engineer',
-      summary: 'Senior Shopware Developer with <strong>' + ATS_YEARS + ' years of experience</strong> in PHP eCommerce. Delivered <strong>6 Shopware 6 storefronts</strong> for German and EU retailers, 2 built from scratch, with custom plugins, Twig storefront themes, Administration extensions and <strong>Klarna, Payone and PayPal</strong> checkout. Strong in <strong>Symfony, PHP 8 and MySQL</strong>, including Laminas microservices and multi-tenant Symfony platforms, with React and Angular front ends. Works directly with clients from requirements to release in Agile Scrum and mentors junior developers.',
+      summary: 'Senior Shopware Developer with <strong>' + YEARS + ' years of experience</strong> in PHP eCommerce. Delivered <strong>6 Shopware 6 storefronts</strong> for German and EU retailers, 2 built from scratch, with custom plugins, Twig storefront themes, Administration extensions and <strong>Klarna, Payone and PayPal</strong> checkout. Strong in <strong>Symfony, PHP 8 and MySQL</strong>, including Laminas microservices and multi-tenant Symfony platforms, with React and Angular front ends. Works directly with clients from requirements to release in Agile Scrum and mentors junior developers.',
       coreSkills: { group: 'Shopware', items: ['Shopware 6', 'Shopware Plugins', 'Twig', 'Symfony', 'PHP 8', 'Doctrine ORM', 'MySQL', 'Klarna', 'Payone', 'PayPal'] },
       skillOrder: ['Ecommerce and CMS', 'Backend Frameworks', 'Payments'],
       leadCategory: 'Shopware & eCommerce',
@@ -115,7 +110,7 @@ const CV = {
     seniordev: {
       file: 'Maninder-Singh-Senior-Software-Developer',
       headline: 'Senior Software Developer | PHP, Laravel, Symfony',
-      summary: 'Senior Software Developer with <strong>' + ATS_YEARS + ' years of experience</strong> building production web applications in <strong>PHP 8, Laravel and Symfony</strong>, with modern front ends in <strong>React.js, TypeScript and Angular</strong>. Specializes in <strong>Shopware 6 eCommerce</strong>, Symfony microservices and multi-tenant platforms for clients in Germany, the UK, the US, Canada and Australia. Currently building an AI voice-receptionist SaaS with React 19 and VAPI. Mentors junior developers and owns client delivery from requirements to release in Agile Scrum.',
+      summary: 'Senior Software Developer with <strong>' + YEARS + ' years of experience</strong> building production web applications in <strong>PHP 8, Laravel and Symfony</strong>, with modern front ends in <strong>React.js, TypeScript and Angular</strong>. Specializes in <strong>Shopware 6 eCommerce</strong>, Symfony microservices and multi-tenant platforms for clients in Germany, the UK, the US, Canada and Australia. Currently building an AI voice-receptionist SaaS with React 19 and VAPI. Mentors junior developers and owns client delivery from requirements to release in Agile Scrum.',
       sections: ['summary', 'skills', 'experience', 'projects', 'education']
     }
   },
@@ -141,12 +136,12 @@ const CV = {
     { value: YEARS + '', label: 'Years experience' },
     { value: '80+', label: 'Sites delivered' },
     { value: '6', label: 'CMS / platforms' },
-    { value: '3', label: 'Companies' }
+    { value: '2', label: 'Companies' }
   ],
 
   /* Resume summary: one short paragraph, since resume checkers flag long
      summaries. The web page keeps the longer three-paragraph `summary`. */
-  atsSummary: 'Senior Software Engineer with <strong>' + ATS_YEARS + ' years of experience</strong> building production web applications in <strong>PHP 8, Laravel and Symfony</strong>, with modern front ends in <strong>React.js, TypeScript and Angular</strong>. Specializes in <strong>Shopware 6 eCommerce</strong>, Symfony microservices and multi-tenant platforms for clients in Germany, the UK, the US, Canada and Australia. Currently building an AI voice-receptionist SaaS with React 19 and VAPI. Mentors junior developers and owns client delivery from requirements to release in Agile Scrum.',
+  atsSummary: 'Senior Software Engineer with <strong>' + YEARS + ' years of experience</strong> building production web applications in <strong>PHP 8, Laravel and Symfony</strong>, with modern front ends in <strong>React.js, TypeScript and Angular</strong>. Specializes in <strong>Shopware 6 eCommerce</strong>, Symfony microservices and multi-tenant platforms for clients in Germany, the UK, the US, Canada and Australia. Currently building an AI voice-receptionist SaaS with React 19 and VAPI. Mentors junior developers and owns client delivery from requirements to release in Agile Scrum.',
 
   /* <strong> renders bold on the web AND as bold runs in the .docx; the .txt
      strips it. Three paragraphs, matching the reference layout. */
@@ -233,22 +228,6 @@ const CV = {
         'Delivered custom <strong>PHP, WordPress, WooCommerce and Magento</strong> sites end to end for clients in the UK, the US, Canada and Australia.',
         'Migrated a life-sciences company from static HTML to <strong>WordPress</strong>, recreating <strong>several hundred pages</strong> with mapped 301 redirects, link monitoring and new lead-capture forms.',
         'Built a WordPress <strong>multisite management plugin</strong> with one-click setup, domain mapping, cPanel integration and bulk theme and plugin activation.'
-      ]
-    },
-    {
-      company: 'Vertex Info Solutions',
-      role: 'Software Developer',
-      location: 'Chandigarh, India',
-      start: DATES.vertexStart,
-      end: DATES.vertexEnd,
-      atsPoints: [
-        'Built custom <strong>core PHP</strong> and MySQL applications with payment gateway integrations, including an online estimate form of <strong>150+ fields</strong> with an admin workflow.',
-        'Developed <strong>WordPress</strong> sites with custom themes and plugins for client projects.'
-      ],
-      points: [
-        'Led external and intranet deployments on <strong>Joomla</strong> from planning through launch and post-deployment support, building custom extensions, components and template customizations.',
-        'Built custom <strong>PHP</strong> business sites, including a <strong>150+ field</strong> online estimate form with admin-side workflow.',
-        'Integrated payment gateways (Authorize.net, PayPal, InfusionSoft, BeanStream) and managed LAMP hosting, SSL and DNS.'
       ]
     }
   ],
@@ -401,8 +380,6 @@ const CV = {
     /* Newest projects, listed first under Projects as their own category. */
     featuredCategory: 'SaaS and Enterprise Platforms',
     featured: ['missional', 'providerpassport', 'mca'],
-    /* Jobs left off the resume (still on the web page). */
-    hideJobs: ['Vertex Info Solutions'],
     /* Project categories left off the resume (still on the web page). */
     hideCategories: ['Joomla', 'Custom PHP & Business Sites'],
     /* Sites checked on 30 September 2026 that no longer exist (no DNS, 404,
