@@ -18,7 +18,7 @@
 const fs = require('fs');
 const path = require('path');
 const {
-  Document, Packer, Paragraph, TextRun, HeadingLevel, ExternalHyperlink, Tab,
+  Document, Packer, Paragraph, TextRun, HeadingLevel, Tab,
   AlignmentType, TabStopType, BorderStyle, UnderlineType, LevelFormat, convertInchesToTwip
 } = require('docx');
 
@@ -66,7 +66,7 @@ function header(r) {
   r.contacts.forEach((c, i) => {
     if (i > 0) children.push(new TextRun({ text: '  |  ', font: FONT, size: SZ.contact, color: RULE }));
     const run = new TextRun({ text: c.text, font: FONT, size: SZ.contact, bold: true, color: '333333' });
-    children.push(c.url ? new ExternalHyperlink({ link: c.url, children: [run] }) : run);
+    children.push(run);
   });
   out.push(new Paragraph({
     alignment: AlignmentType.CENTER,
@@ -135,7 +135,7 @@ function project(r) {
       children: [new TextRun({ text: r.title, font: FONT, size: SZ.h3, bold: true, color: ACCENT })].concat(
         ...r.links.map((l) => [
           new TextRun({ text: '  |  ', font: FONT, size: SZ.body, color: RULE }),
-          new ExternalHyperlink({ link: l.url, children: [new TextRun({ text: l.label, font: FONT, size: SZ.body, color: ACCENT_SOFT, underline: { type: UnderlineType.SINGLE } })] })
+          new TextRun({ text: l.label, font: FONT, size: SZ.body, color: ACCENT_SOFT })
         ])
       )
     }),
@@ -149,7 +149,7 @@ function link(r) {
   return new Paragraph({
     spacing: { before: 80, after: 40 },
     children: textRuns(r.text + ' ').concat([
-      new ExternalHyperlink({ link: r.url, children: [new TextRun({ text: r.label, font: FONT, size: SZ.body, color: ACCENT, underline: { type: UnderlineType.SINGLE } })] })
+      new TextRun({ text: r.label, font: FONT, size: SZ.body, color: ACCENT })
     ])
   });
 }
@@ -161,13 +161,13 @@ function subgroup(text) {
   });
 }
 
-/* Linked project name, then its description, all in one bullet paragraph. */
+/* Project name (plain text, not a link), then its description, all in one bullet paragraph. */
 function linkBullet(it) {
   const name = new TextRun({ text: it.label, font: FONT, size: SZ.body, bold: true, color: ACCENT });
   return new Paragraph({
     numbering: { reference: BULLETS, level: 0 },
     spacing: { after: 20 },
-    children: [it.url ? new ExternalHyperlink({ link: it.url, children: [name] }) : name]
+    children: [name]
       .concat([new TextRun({ text: ': ' + it.text, font: FONT, size: SZ.body, color: INK })])
   });
 }

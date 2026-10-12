@@ -46,8 +46,8 @@ ck "tabs only on dated headers" "$(n "$X" '<w:tab/>')" "$EXPECTED_TABS"
 ge "Heading2 section headings" "$(n "$X" 'w:val="Heading2"')" 5
 ge "outlineLvl present" "$(( $(n "$STY" '<w:outlineLvl') + $(n "$X" '<w:outlineLvl') ))" 5
 ge "numPr bullets" "$(n "$X" '<w:numPr>')" 10
-ge "hyperlinks" "$(n "$X" '<w:hyperlink')" 2
-ck "no http:// rel targets" "$(n "$(unzip -p "$D" word/_rels/document.xml.rels)" 'Target="http://')" 0
+# Links are plain text by request: no clickable hyperlinks at all.
+ck "no hyperlinks" "$(n "$X" '<w:hyperlink')" 0
 
 # ===== text stream as a naive parser sees it: only </w:p> makes a newline =====
 TXT=$(printf '%s' "$X" | sed 's|</w:p>|\n|g; s|<[^>]*>||g' \
