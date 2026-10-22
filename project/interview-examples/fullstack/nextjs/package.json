@@ -1,0 +1,32 @@
+{
+  "name": "interview-examples-nextjs",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Full-Stack Handbook topics 171-190 and 222: Next.js App Router (plus Pages Router) examples",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "next build && node scripts/check.mjs",
+    "ex": "node scripts/check.mjs"
+  },
+  "dependencies": {
+    "@fontsource/inter": "5.3.0",
+    "jose": "6.2.12",
+    "marked": "18.1.1",
+    "next": "16.4.1",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "server-only": "0.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.5",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "typescript": "5.9.3"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

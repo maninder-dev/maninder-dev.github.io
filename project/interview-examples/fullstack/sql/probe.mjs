@@ -1,0 +1,24 @@
+import { PGlite } from '@electric-sql/pglite';
+import mysql from 'mysql2/promise';
+const db = new PGlite();
+const t = async (label, sql) => { try { const r = await db.query(sql); console.log(label, JSON.stringify(r.rows).slice(0,300)); } catch (e) { console.log(label, 'ERR', e.message); } };
+await t('ver', 'select version()');
+await db.exec(`create table u(id serial primary key, email text, active bool, n int); insert into u(email,active,n) select 'u'||g||'@x.com', g%10<>0, g%100 from generate_series(1,50000) g; analyze u;`);
+await t('explain', "explain select * from u where email='u5@x.com'");
+await db.exec('create index on u(email)');
+await t('explain2', "explain (analyze, buffers) select * from u where email='u5@x.com'");
+await t('stats', "select relname,n_dead_tup,n_live_tup from pg_stat_user_tables");
+await t('idx', "select indexrelname, idx_scan from pg_stat_user_indexes");
+await t('role', "create role app_user login; grant select on u to app_user; set role app_user; select count(*) from u");
+await t('whoami', "select current_user");
+await t('drop', "drop table u");
+await t('reset', "reset role");
+await t('locks', "begin; select * from u where id=1 for update; select locktype, mode, relation::regclass::text from pg_locks; ");
+await t('commit', 'commit');
+await t('proc', "create table log(x int); create procedure p() language plpgsql as $$ begin insert into log values(1); commit; insert into log values(2); rollback; end $$;");
+await t('call', 'call p()'); await t('log', 'select * from log');
+await t('vac', 'vacuum full u'); await t('size', "select pg_relation_size('u')");
+await t('pss', 'create extension pg_stat_statements');
+await t('par', 'show max_parallel_workers_per_gather');
+await t('xid', 'select txid_current(), pg_current_xact_id()');
+try { const c = await mysql.createConnection({host:'127.0.0.1',user:'root',password:'',connectTimeout:1500}); console.log('mysql OK', (await c.query('select version() v'))[0]); await c.end(); } catch(e) { console.log('mysql ERR', e.code); }

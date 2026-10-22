@@ -1,0 +1,17 @@
+{
+  "name": "interview-examples-sql",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Runnable SQL / PostgreSQL / MySQL examples for the Full-Stack Interview Handbook (topics 1-56, 87-101, 216-217)",
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "ex": "node run.js",
+    "test": "node run.js --all"
+  },
+  "dependencies": {
+    "@electric-sql/pglite": "0.5.8",
+    "ioredis-mock": "8.13.1",
+    "mysql2": "3.24.5"
+  }
+}

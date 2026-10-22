@@ -1,0 +1,22 @@
+{
+    "name": "acme/sms",
+    "description": "Topic 89: a tiny in-repo Laravel package (config, singleton client, migration, command).",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": "^8.3",
+        "illuminate/support": "^13.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Acme\\Sms\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Acme\\Sms\\SmsServiceProvider"
+            ]
+        }
+    }
+}

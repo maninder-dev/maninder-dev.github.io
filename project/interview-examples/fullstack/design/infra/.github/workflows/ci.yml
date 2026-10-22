@@ -1,0 +1,38 @@
+# Topic 206 - GitHub Actions pipeline. In a real repo this lives at .github/workflows/ci.yml.
+# Not executed by npm test; 206-ci-pipeline.js parses and checks it.
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env: { POSTGRES_PASSWORD: test }
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: npm run lint && npm run typecheck
+      - run: npm test -- --coverage
+        env: { DATABASE_URL: "postgres://postgres:test@localhost:5432/postgres" }
+
+  deploy:
+    needs: test
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t registry.example.com/api:${{ github.sha }} .
+      - run: docker push registry.example.com/api:${{ github.sha }}
+      - run: ./scripts/deploy.sh ${{ github.sha }}

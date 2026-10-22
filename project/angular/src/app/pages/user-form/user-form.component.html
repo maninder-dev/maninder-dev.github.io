@@ -1,0 +1,52 @@
+<div class="card" style="max-width: 720px; margin: 0 auto">
+  <div class="page-head">
+    <h2>{{ isEdit() ? 'Edit User' : 'Add User' }}</h2>
+    <a routerLink="/users">Cancel</a>
+  </div>
+  @if (error()) {
+    <div class="alert alert-error">{{ error() }}</div>
+  }
+  <form (ngSubmit)="submit()">
+    <div class="row">
+      <div class="field">
+        <label>Full name *</label>
+        <input name="name" [(ngModel)]="form.name" required />
+      </div>
+      <div class="field">
+        <label>Email *</label>
+        <input name="email" type="email" [(ngModel)]="form.email" required />
+      </div>
+    </div>
+    <div class="row">
+      <div class="field">
+        <label>{{ isEdit() ? 'New password (leave blank to keep)' : 'Password *' }}</label>
+        <input name="password" type="password" minlength="6" [(ngModel)]="form.password" [required]="!isEdit()" />
+      </div>
+      <div class="field">
+        <label>Role</label>
+        <select name="role" [(ngModel)]="form.role" [disabled]="isSelf()">
+          <option value="student">Student</option>
+          <option value="admin">Admin</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="field">
+        <label>Roll no.</label>
+        <input name="rollNo" [(ngModel)]="form.rollNo" />
+      </div>
+      <div class="field">
+        <label>Course</label>
+        <input name="course" [(ngModel)]="form.course" />
+      </div>
+    </div>
+    <div class="field">
+      <label>Phone</label>
+      <input name="phone" [(ngModel)]="form.phone" />
+    </div>
+    <app-image-picker label="Profile photo" [current]="currentAvatar()" (fileChange)="avatar = $event" />
+    <button class="btn-primary" [disabled]="busy()">
+      {{ busy() ? 'Saving…' : isEdit() ? 'Update User' : 'Create User' }}
+    </button>
+  </form>
+</div>

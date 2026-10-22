@@ -1,0 +1,49 @@
+<div class="page-head">
+  <h2>Books Library</h2>
+  <div class="actions">
+    <input
+      class="search"
+      name="q"
+      placeholder="Search title, author, ISBN…"
+      [(ngModel)]="q"
+      (ngModelChange)="search$.next($event)"
+    />
+    @if (auth.isAdmin()) {
+      <a routerLink="/books/new" class="btn btn-primary">+ Add Book</a>
+    }
+  </div>
+</div>
+
+@if (error()) {
+  <div class="alert alert-error">{{ error() }}</div>
+}
+
+@if (loading()) {
+  <p class="muted">Loading…</p>
+} @else {
+  <div class="grid">
+    @for (b of list(); track b._id) {
+      <div class="card book-card">
+        @if (b.coverImage) {
+          <img class="cover" [src]="imageUrl(b.coverImage)" [alt]="b.title" />
+        } @else {
+          <div class="cover placeholder">📖</div>
+        }
+        <div class="body">
+          <h3>{{ b.title }}</h3>
+          <span class="muted">by {{ b.author }}</span>
+          <span><span class="badge">{{ b.category }}</span> · {{ b.copies }} copies</span>
+          <div class="actions">
+            <a [routerLink]="['/books', b._id]" class="btn btn-sm">View</a>
+            @if (auth.isAdmin()) {
+              <a [routerLink]="['/books', b._id, 'edit']" class="btn btn-sm">Edit</a>
+              <button class="btn-sm btn-danger" (click)="remove(b)">Delete</button>
+            }
+          </div>
+        </div>
+      </div>
+    } @empty {
+      <p class="muted">No books found.</p>
+    }
+  </div>
+}

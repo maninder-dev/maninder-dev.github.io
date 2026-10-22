@@ -1,0 +1,26 @@
+{
+  "name": "interview-examples-mongo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Full-Stack handbook topics 57-86 and 218: MongoDB, Mongoose, Drizzle ORM on PGlite",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "ex": "node run.js",
+    "test": "node run.js --all"
+  },
+  "dependencies": {
+    "@electric-sql/pglite": "0.5.10",
+    "drizzle-orm": "0.45.4",
+    "mongodb": "7.7.0",
+    "mongodb-memory-server": "11.3.0",
+    "mongoose": "9.11.2"
+  },
+  "config": {
+    "mongodbMemoryServer": {
+      "version": "7.0.14"
+    }
+  }
+}

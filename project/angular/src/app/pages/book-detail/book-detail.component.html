@@ -1,0 +1,37 @@
+@if (error()) {
+  <div class="alert alert-error">{{ error() }}</div>
+}
+
+@if (book(); as b) {
+  <div class="card">
+    <div class="page-head">
+      <a routerLink="/books">← Back to books</a>
+      @if (auth.isAdmin()) {
+        <div class="actions">
+          <a [routerLink]="['/books', b._id, 'edit']" class="btn">Edit</a>
+          <button class="btn-danger" (click)="remove(b)">Delete</button>
+        </div>
+      }
+    </div>
+    <div class="detail">
+      @if (b.coverImage) {
+        <img [src]="imageUrl(b.coverImage)" [alt]="b.title" />
+      } @else {
+        <div class="cover placeholder" style="aspect-ratio: 3 / 4">📖</div>
+      }
+      <div>
+        <h2>{{ b.title }}</h2>
+        <p class="muted">by {{ b.author }}</p>
+        <dl>
+          <dt>Category</dt><dd>{{ b.category || '—' }}</dd>
+          <dt>ISBN</dt><dd>{{ b.isbn || '—' }}</dd>
+          <dt>Published</dt><dd>{{ b.publishedYear || '—' }}</dd>
+          <dt>Copies</dt><dd>{{ b.copies }}</dd>
+        </dl>
+        <p>{{ b.description }}</p>
+      </div>
+    </div>
+  </div>
+} @else if (!error()) {
+  <p class="muted">Loading…</p>
+}

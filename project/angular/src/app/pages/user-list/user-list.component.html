@@ -1,0 +1,58 @@
+<div class="page-head">
+  <h2>Users</h2>
+  <div class="actions">
+    <input
+      class="search"
+      name="q"
+      placeholder="Search name, email, roll no…"
+      [(ngModel)]="q"
+      (ngModelChange)="filter$.next()"
+    />
+    <select name="role" [(ngModel)]="role" (ngModelChange)="filter$.next()" style="width: auto">
+      <option value="">All roles</option>
+      <option value="student">Students</option>
+      <option value="admin">Admins</option>
+    </select>
+    <a routerLink="/users/new" class="btn btn-primary">+ Add User</a>
+  </div>
+</div>
+
+@if (error()) {
+  <div class="alert alert-error">{{ error() }}</div>
+}
+
+<div class="card table-wrap">
+  @if (loading()) {
+    <p class="muted">Loading…</p>
+  } @else {
+    <table>
+      <thead>
+        <tr>
+          <th></th><th>Name</th><th>Email</th><th>Roll no.</th><th>Course</th><th>Role</th><th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (u of list(); track u._id) {
+          <tr>
+            <td><app-avatar [user]="u" /></td>
+            <td>{{ u.name }}</td>
+            <td>{{ u.email }}</td>
+            <td>{{ u.rollNo || '—' }}</td>
+            <td>{{ u.course || '—' }}</td>
+            <td><span class="badge {{ u.role }}">{{ u.role }}</span></td>
+            <td>
+              <div class="actions">
+                <a [routerLink]="['/users', u._id, 'edit']" class="btn btn-sm">Edit</a>
+                @if (u._id !== auth.user()?._id) {
+                  <button class="btn-sm btn-danger" (click)="remove(u)">Delete</button>
+                }
+              </div>
+            </td>
+          </tr>
+        } @empty {
+          <tr><td colspan="7" class="muted">No users found.</td></tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>

@@ -1,0 +1,49 @@
+<div class="card" style="max-width: 720px; margin: 0 auto">
+  <div class="page-head">
+    <h2>{{ isEdit ? 'Edit Book' : 'Add Book' }}</h2>
+    <a routerLink="/books">Cancel</a>
+  </div>
+  @if (error()) {
+    <div class="alert alert-error">{{ error() }}</div>
+  }
+  <form (ngSubmit)="submit()">
+    <div class="row">
+      <div class="field">
+        <label>Title *</label>
+        <input name="title" [(ngModel)]="form.title" required />
+      </div>
+      <div class="field">
+        <label>Author *</label>
+        <input name="author" [(ngModel)]="form.author" required />
+      </div>
+    </div>
+    <div class="row">
+      <div class="field">
+        <label>ISBN</label>
+        <input name="isbn" [(ngModel)]="form.isbn" />
+      </div>
+      <div class="field">
+        <label>Category</label>
+        <input name="category" [(ngModel)]="form.category" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="field">
+        <label>Published year</label>
+        <input name="publishedYear" type="number" [(ngModel)]="form.publishedYear" />
+      </div>
+      <div class="field">
+        <label>Copies</label>
+        <input name="copies" type="number" min="0" [(ngModel)]="form.copies" />
+      </div>
+    </div>
+    <div class="field">
+      <label>Description</label>
+      <textarea name="description" [(ngModel)]="form.description"></textarea>
+    </div>
+    <app-image-picker label="Cover image" [current]="currentCover()" (fileChange)="cover = $event" />
+    <button class="btn-primary" [disabled]="busy()">
+      {{ busy() ? 'Saving…' : isEdit ? 'Update Book' : 'Create Book' }}
+    </button>
+  </form>
+</div>

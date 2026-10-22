@@ -1,0 +1,9 @@
+node_modules/
+.env
+dist/
+.angular/
+node/uploads/*
+!node/uploads/.gitkeep
+.next/
+*.tsbuildinfo
+next-env.d.ts

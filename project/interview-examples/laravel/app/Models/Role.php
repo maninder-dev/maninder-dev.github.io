@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
+class Role extends Model
+{
+    public $timestamps = false;
+
+    protected $fillable = ['name'];
+
+    public function permissions(): BelongsToMany
+    {
+        return $this->belongsToMany(Permission::class);
+    }
+
+    public function givePermissionTo(string $name): void
+    {
+        $this->permissions()->syncWithoutDetaching([Permission::firstOrCreate(['name' => $name])->id]);
+    }
+}

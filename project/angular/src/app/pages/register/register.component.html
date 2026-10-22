@@ -1,0 +1,37 @@
+<div class="card auth-card">
+  <h2>Student Registration</h2>
+  @if (error()) {
+    <div class="alert alert-error">{{ error() }}</div>
+  }
+  <form (ngSubmit)="submit()">
+    <div class="field">
+      <label>Full name *</label>
+      <input name="name" [(ngModel)]="form.name" required />
+    </div>
+    <div class="field">
+      <label>Email *</label>
+      <input name="email" type="email" [(ngModel)]="form.email" required />
+    </div>
+    <div class="field">
+      <label>Password * (min 6)</label>
+      <input name="password" type="password" minlength="6" [(ngModel)]="form.password" required />
+    </div>
+    <div class="row">
+      <div class="field">
+        <label>Roll no.</label>
+        <input name="rollNo" [(ngModel)]="form.rollNo" />
+      </div>
+      <div class="field">
+        <label>Course</label>
+        <input name="course" [(ngModel)]="form.course" />
+      </div>
+    </div>
+    <div class="field">
+      <label>Phone</label>
+      <input name="phone" [(ngModel)]="form.phone" />
+    </div>
+    <app-image-picker label="Profile photo" (fileChange)="avatar = $event" />
+    <button class="btn-primary" [disabled]="busy()">{{ busy() ? 'Creating…' : 'Register' }}</button>
+  </form>
+  <p class="muted">Already registered? <a routerLink="/login">Login</a></p>
+</div>

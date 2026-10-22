@@ -1,0 +1,26 @@
+# Topic 205 - the whole stack locally: `docker compose up`. Not run by npm test; 205-docker.js checks it.
+services:
+  api:
+    build: .
+    ports: ["3000:3000"]
+    environment:
+      DATABASE_URL: postgres://app:secret@db:5432/shop
+      REDIS_URL: redis://cache:6379
+    depends_on:
+      db: { condition: service_healthy }
+      cache: { condition: service_started }
+
+  db:
+    image: postgres:16
+    environment: { POSTGRES_USER: app, POSTGRES_PASSWORD: secret, POSTGRES_DB: shop }
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U app -d shop"]
+      interval: 5s
+      retries: 10
+
+  cache:
+    image: redis:7
+
+volumes:
+  pgdata:
