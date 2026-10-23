@@ -1,0 +1,56 @@
+Maninder Singh
+Senior Full Stack Developer | React, Node.js, TypeScript
++91 98728 52673 | maninder0000@yahoo.com | Mohali, Punjab, India
+Summary
+Senior Full Stack Developer with 11 years of experience building production web applications end to end: front ends in React, Next.js, TypeScript and Angular, back ends in Node.js and Express.js. Built React front ends for 7 products, including an agentic AI voice-receptionist SaaS and a consulting platform serving 8,000+ consultants, plus MEAN and MERN stack applications with REST and GraphQL APIs. Works with international clients, leads code reviews and mentors junior developers in Agile Scrum.
+Technical Skills
+Full Stack: React.js, Next.js, TypeScript, Node.js, Express.js, Angular, Redux, MongoDB, MySQL, PostgreSQL, REST API, GraphQL
+Frontend: React.js, ReactJS, React 19, Next.js, Vite, Angular, Ionic, Redux, Redux-Saga, React Hooks, Material UI, jQuery, Bootstrap, Sass
+Backend Frameworks: Java Spring, Node.js, Express.js, NestJS, MEAN Stack, MERN Stack, REST API, GraphQL, Microservices
+Databases: MySQL, MariaDB, MongoDB, PostgreSQL, Vector Database
+Core Languages: Java, JavaScript (ES6+), TypeScript, SQL, HTML5, CSS3
+AI and Voice: VAPI Voice AI, Bolna, LiveKit, AI Call Classification, Twilio Lookup, Nomorobo
+Ecommerce: Shopify
+Cloud and DevOps: AWS (Amazon Web Services), Apache, Git, GitHub, GitLab, Bitbucket, SSL, DNS
+Payments: Stripe, PayPal, Braintree
+Practices: Agile, Scrum, JIRA, Code Review, Unit Testing, Mentoring, Client Communication
+Also worked with: Vue.js, Docker, CI/CD (Continuous Integration and Continuous Delivery), Microsoft Azure
+Work Experience
+Senior Software Engineer	February 2017 - Present
+Orion eSolutions, LLC, Mohali, Punjab, India
+Built React and TypeScript front ends for 7 products, including a consulting platform serving 8,000+ consultants and an agentic AI voice-receptionist SaaS on React 19 and Vite.
+Built enterprise interfaces in React with Redux, Redux-Saga, React Hooks and Material UI for MSX International, and a privacy and consent portal on Node.js, GraphQL and MongoDB with a React Native app.
+Develop MEAN and MERN stack apps (MongoDB, Express.js, Angular, React, Node.js) with REST and GraphQL APIs, including a 4-role Angular and Ionic survey platform.
+Built Angular and Java Spring features for a healthcare provider credentialing platform managing hospital, clinic and staff records.
+Shipped Stripe and Braintree payments, Facebook and Google OAuth and subscription modules in React applications.
+Lead code reviews, automated tests and client delivery in Agile Scrum for international clients, and mentor junior developers.
+Senior Software Developer	October 2015 - January 2017
+Maven Softwares, Mohali, Punjab, India
+Built responsive web front ends in JavaScript, jQuery, HTML5, CSS3 and Bootstrap for clients in 4 countries (UK, US, Canada, Australia).
+Integrated front ends with REST APIs and third-party services, including payment gateways and lead-capture forms.
+Migrated a life-sciences site of several hundred pages from static HTML to a new platform with mapped 301 redirects and link monitoring.
+Improved page speed, cross-browser compatibility and mobile responsiveness across client sites, and managed code in Git.
+Worked directly with international clients to gather requirements, estimate tasks and deliver releases on schedule.
+Projects
+React and TypeScript
+app.missionalagents.com: MissionalAgents, a multi-tenant agentic AI phone-receptionist SaaS for churches. A VAPI voice AI agent answers the phone line of each church, classifies calls by topic, answers from a church-specific Knowledge Engine and transfers live or takes a message. Built staff email notifications with per-contact frequency and spam screening with Nomorobo and Twilio Lookup. (Agentic AI, React 19, Vite, TypeScript, VAPI Voice AI, Twilio, Nomorobo, REST API)
+providerpassport.io: Provider Passport, a healthcare credentialing platform. Built Angular and Java Spring features for managing hospital, clinic, doctor, nurse and staff records, and the patient and provider data each insurance company requires. (Angular, Java, Spring Framework, REST API, TypeScript)
+rankings.pickleball.ky: Pickleball rankings and scorecard platform for singles and doubles matches. Calculates rankings from match results, integrates with CourtReserve and DUPR, and includes cron jobs and import/export reporting. (React, CourtReserve, DUPR, Cron jobs)
+Cook and Boardman Assistants: Suite of three React business apps for Cook and Boardman: Takeoff Assistant (toa.cookandboardman.io), Acknowledgement Review App (poa.cookandboardman.io) and Project Manager Assistant (pma.cookandboardman.io) for project tracking and management. (React)
+voagents.ai: VoAgents, an agentic AI application and in-house company product, built with Next.js. (Next.js, React, Agentic AI)
+KingsleyGate Partners Job Portal: Job portal for KingsleyGate Partners, an executive search firm, built on the Ignyte platform. (React, Job portal)
+triceraprint.com: Photo printing and framing software integrated with Shopify. Built chunked uploads that handle gigabyte-sized image files reliably. (React, Node.js, MongoDB, Shopify, Chunked uploads)
+schmetterling.de: Multi-tenant Symfony-based CRM for a travel company, covering airline and hotel bookings. Built Angular and React microservices for the CRM, including the Campaign Master, Notes Management and Newsletter Unsubscriptions services. (Angular, React, Microservices, PostgreSQL, Multi-tenant)
+Huft: eCommerce website selling pet food and pet products, integrated with Shopify. (React, Node.js, MongoDB, PostgreSQL, Shopify)
+staff.mca.ca: MCA retail product survey platform with four role-based apps (staff.mca.ca, fieldrep.mca.ca, superadmin.mca.ca and client admin). Built the Angular portals and the Ionic surveyor mobile app for survey jobs shared by client admins. (Angular, Ionic, TypeScript, REST API, Role-based Access Control)
+MSXI mWISE: Warranty platform for vehicle manufacturers covering importer audits and warranty assessments. Built the security and queue pages, table search filters and automated tests. (React, TypeScript, Redux, Material UI)
+XcooBee (Art of Living): Privacy and consent network portal with multi-user chat, secure data sharing, a payment wizard and a React Native mobile app, plus specs and code reviews. (React, Node.js, GraphQL, MongoDB, React Native)
+Heritage Olympiad: Platform bringing heritage education into Indian schools. Built the front end and all APIs, Facebook and Google login, subscriptions and payment integration. (React, Redux, API design)
+Talent Recognition: Psychometric testing web app with admin and user roles. Implemented web-camera capture and PDF generation, Stripe payments, the partner onboarding process and React-Redux/Hooks state management; defined QA procedures and deployment. (React, Redux, Stripe)
+Guild: Virtual consulting firm platform for a client-reported network of 8,000+ vetted independent consultants. Built the front end and design to client needs, created the resource and project-posting features, and worked across both sides of the application. (React, Bootstrap)
+Shopify
+whatisblik.com: Shopify eCommerce site for graphics products. (Shopify)
+zinus.com: Shopify online store for mattresses, with pages built in Shogun and React. (Shopify, Shogun, React)
+Education
+Bachelor of Science in Information Technology	2011
+Doaba College (Guru Nanak Dev University), Jalandhar, Punjab, India

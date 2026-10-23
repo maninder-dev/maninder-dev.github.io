@@ -1,6 +1,6 @@
 Maninder Singh
 Senior Full Stack Developer | React, Node.js, TypeScript
-+91 98728 52673 | maninder6005@gmail.com | linkedin.com/in/maninder0000 | Mohali, Punjab, India
++91 98728 52673 | maninder6005@gmail.com | Mohali, Punjab, India
 Summary
 Senior Full Stack Developer with 11 years of experience building production web applications end to end: front ends in React, Next.js, TypeScript and Angular, back ends in Node.js and Express.js. Built React front ends for 7 products, including an agentic AI voice-receptionist SaaS and a consulting platform serving 8,000+ consultants, plus MEAN and MERN stack applications with REST and GraphQL APIs. Works with international clients, leads code reviews and mentors junior developers in Agile Scrum.
 Technical Skills
